@@ -26,19 +26,9 @@ Složce **temp** je třeba přiřadit plná přístupová práva pro všechny sk
 
 Ve složce **app/config** existuje soubor **config.local.neon** s přihlašovacími údaji k databázi:
 
-*
-parameters:
-
-database:
-	dsn: 'pgsql:host=127.0.0.1;dbname=pa036'
-	user: 'postgres'
-	password: 'postgres'
-	options:
-		lazy: yes
-*
+*...dsn: 'pgsql:host=127.0.0.1;dbname=pa036' user: 'postgres' password: 'postgres'...*
 
 přičemž jméno databáze je **pa036**, uživatel **postgres** a heslo **postgres**. 
-
 
 
 
