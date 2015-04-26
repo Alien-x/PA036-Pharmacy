@@ -1,6 +1,16 @@
 {block content}
-<h1 n:block=title>Sign in</h1>
-
-{control signInForm}
-
-{* or use {include '../components/form.latte', form => signInForm} *}
+    
+    <div id="login" class="page">
+        <h1 n:block="title">Přihlásit se</h1>
+        
+        <div class="logo">
+            <img src="images/logo.jpg" alt="logo">
+        </div>
+        <div class="content">
+            {if !$user->loggedIn}
+                {control signInForm}
+            {/if}
+            
+        </div>
+    </div>
+{/block}

@@ -22,7 +22,19 @@
 <body>
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
-	{include content}
+        {if $user->loggedIn}
+            <a n:href="Sign:out">Odhlásit</a>
+            {include content}
+        {else}
+            <div id="login" class="page">
+                <div class="logo">
+                    <img src="images/logo.jpg" alt="logo">
+                </div>
+                <a n:href="Sign:in">Přihlásit se do systému</a>
+            </div>
+        {/if}
+        
+	
 
 	{block scripts}
 	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>

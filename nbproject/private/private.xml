@@ -3,13 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/PA036-Pharmacy/app/presenters/HomepagePresenter.php</file>
-            <file>file:/var/www/PA036-Pharmacy/.git/config</file>
-            <file>file:/var/www/PA036-Pharmacy/app/presenters/BasePresenter.php</file>
-            <file>file:/var/www/PA036-Pharmacy/.gitignore</file>
-            <file>file:/var/www/PA036-Pharmacy/app/presenters/templates/@layout.latte</file>
+            <file>file:/var/www/PA036-Pharmacy/www/.htaccess</file>
+            <file>file:/var/www/PA036-Pharmacy/app/config/config.local.neon</file>
+            <file>file:/var/www/PA036-Pharmacy/vendor/nette/deprecated/tests/Templating/expected/FileTemplate.phtml</file>
+            <file>file:/var/www/PA036-Pharmacy/vendor/nette/deprecated/tests/Templating/expected/FileTemplate.html</file>
+            <file>file:/var/www/PA036-Pharmacy/app/presenters/SignPresenter.php</file>
             <file>file:/var/www/PA036-Pharmacy/app/presenters/templates/Homepage/default.latte</file>
-            <file>file:/var/www/PA036-Pharmacy/www/css/layout.css</file>
+            <file>file:/var/www/PA036-Pharmacy/app/presenters/templates/@layout.latte</file>
+            <file>file:/var/www/PA036-Pharmacy/.git/config</file>
         </group>
     </open-files>
 </project-private>

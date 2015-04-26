@@ -1,0 +1,9 @@
+parameters:
+
+
+database:
+	dsn: 'pgsql:host=127.0.0.1;dbname=pa036'
+	user: 'postgres'
+	password: 'postgres'
+	options:
+		lazy: yes

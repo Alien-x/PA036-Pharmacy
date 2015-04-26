@@ -11,7 +11,8 @@ body {
     margin: 0 auto;
 }
 
-#homepage.page {
+#homepage.page,
+#login.page {
     width:970px;
     text-align: center;
 }
@@ -21,12 +22,14 @@ body {
     color: red;
 }
 
+#login .logo,
 #homepage .logo,
 #homepage .content {
     width: 100%;
     margin: 0 auto;
 }
 
+#login .logo img,
 #homepage .logo img {
     width: 600px;
     margin: 20px auto 30px;

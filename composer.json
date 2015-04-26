@@ -1,0 +1,18 @@
+{
+	"name": "pa036-pharmacy",
+	"type": "project",
+	"license": ["Unlicense"],
+	"authors": [
+		{
+			"name": "Michal Mašír"
+		}
+	],
+	"require": {
+		"php": ">= 5.3.7",
+		"nette/nette": "~2.2.0",
+		"dg/adminer-custom": "~1.5"
+	},
+	"require-dev": {
+		"nette/tester": "~1.0"
+	}
+}

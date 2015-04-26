@@ -6,6 +6,7 @@
         <div class="logo">
             <img src="images/logo.jpg" alt="logo">
         </div>
+        
         <div class="content">
             <a class="box" href="#">
                     <img src="images/sklad.png" alt="sklad">
@@ -15,6 +16,14 @@
                 <img src="images/pokladna.png" alt="pokladna">
                 <h2>Pokladniční systém</h2>
             </a>
+            
+            
+            {foreach $tovary as $tovar}
+            <div style="text-align: left;">
+                <p><a href="{link Tovar:show $tovar->id_tovar}">{$tovar->nazov}</a></p>
+            </div>
+            {/foreach}
+            
         </div>
     </div>
 {/block}
