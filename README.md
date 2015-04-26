@@ -18,17 +18,13 @@ Clone into: *umístění projektu*
 
 A **Finish**.
 
-### 2) Stažení balíčků Nette
-
-Na gitu se ukládá pouze náš zdrojový kód. Celý framework Nette se při inicializaci stahuje zvlášť. Naštěstí to jde velmi jednoduše pomocí Composeru, návod na instalaci je zde http://doc.nette.org/cs/2.3/composer#toc-linux .
-
-Pak se ze složky projektu pomocí příkazu **composer update** vše automaticky dostahuje.
+### 2) Temp
 
 Složce **temp** je třeba přiřadit plná přístupová práva pro všechny skupiny (čtení i zápis).
 
 ### 3) Připojení k databázi
 
-Ve složce **app/config** vytvořte soubor **config.local.neon** s obsahem:
+Ve složce **app/config** existuje soubor **config.local.neon** s přihlašovacími údaji k databázi:
 
 *
 parameters:
@@ -41,7 +37,9 @@ database:
 		lazy: yes
 *
 
-přičemž jméno databáze je **pa036**, uřivatel **postgres** a heslo **postgres**.
+přičemž jméno databáze je **pa036**, uživatel **postgres** a heslo **postgres**. 
+
+
 
 
 
