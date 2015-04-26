@@ -1,0 +1,117 @@
+body {
+	font-size: 15px;
+	line-height: 1.6;
+	color: #333;
+	background: white;
+        text-align: center;
+}
+
+.page {
+    position: relative;
+    margin: 0 auto;
+}
+
+#homepage.page {
+    width:970px;
+    text-align: center;
+}
+
+#homepage h1 {
+    display: none;
+    color: red;
+}
+
+#homepage .logo,
+#homepage .content {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#homepage .logo img {
+    width: 600px;
+    margin: 20px auto 30px;
+}
+
+#homepage .content a.box {
+    background: #e6e6e6;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    width: 250px;
+    display: inline-block;
+    padding: 30px 0 10px;
+    margin: 0 20px 0 0;
+}
+#homepage .content a.box,
+#homepage .content a.box:hover {
+    text-decoration: none;
+    color: #333;
+}
+
+#homepage .content a.box:hover {
+    background: #eee;
+}
+
+
+#homepage .content .box img {
+    /*max-width: 250px;*/
+    height: 160px;
+    margin: 0;
+    padding: 0;
+}
+
+#homepage .content .box h2 {
+    font-size: 38px;
+    font-weight: bold;
+    color: #aaa;
+    padding: 0 10px;
+}
+
+
+
+
+
+
+
+
+
+
+#ajax-spinner {
+	margin: 15px 0 0 15px;
+	padding: 13px;
+	background: white url('../images/spinner.gif') no-repeat 50% 50%;
+	font-size: 0;
+	z-index: 123456;
+	display: none;
+}
+
+div.flash {
+	color: black;
+	background: #FFF9D7;
+	border: 1px solid #E2C822;
+	padding: 1em;
+	margin: 1em 0;
+}
+
+a[href^="#error:"] {
+	background: red;
+	color: white;
+}
+
+form th, form td {
+	vertical-align: top;
+	font-weight: normal;
+}
+
+form th {
+	text-align: right;
+}
+
+form .required label {
+	font-weight: bold;
+}
+
+form .error {
+	color: #D00;
+	font-weight: bold;
+}
