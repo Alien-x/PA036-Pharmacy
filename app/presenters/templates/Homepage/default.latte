@@ -2,8 +2,6 @@
 
 <div id="homepage" class="page">
     {if $user->loggedIn}
-        <h1 n:block="title">PA036 - Pharmacy</h1>
-        <li><a n:href="Sign:out">Odhlásit</a></li>
         <div class="content">
             <a class="box" href="#">
                 <img src="images/sklad.png" alt="sklad">
@@ -13,21 +11,34 @@
                 <img src="images/pokladna.png" alt="pokladna">
                 <h2>Pokladniční systém</h2>
             </a>
-
-
-            {foreach $tovary as $tovar}
-                <div style="text-align: left;">
-                    <p><a href="{link Tovar:show $tovar->id_tovar}">{$tovar->nazov}</a></p>
-                </div>
-            {/foreach}
-
+            <br /><br /><br />
+            <table id="table_id" class="display">    
+                <thead>        
+                    <tr>
+                        <th>#ID</th>
+                        <th>Názov</th>
+                        <th>Cena</th>
+                        <th>Doplatok</th>
+                        <th>Predpis</th>
+                        <th>Aktívny</th>
+                        <th>Počet</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $tovary as $tovar}
+                    <tr>
+                        <td><p>{$tovar->id_tovar}</p></td>
+                        <td><p><a href="{link Tovar:show $tovar->id_tovar}">{$tovar->nazov}</a></p></td>
+                        <td><p>{$tovar->cena}</p></td>
+                        <td><p>{$tovar->doplatok}</p></td>
+                        <td><p>{$tovar->na_predpis}</p></td>
+                        <td><p>{$tovar->aktivny}</p></td>
+                        <td><p>{$tovar->mnozstvo}</p></td>
+                    </tr>
+                    {/foreach}
+                </tbody></table>
         </div>
-
-
-    {else}
-        <div class="content">
-        <li><a n:href="Sign:in">Přihlásit do Systému</a></li>
-        {/if}
-        </div>
+    {/if}
+        
 </div>
 {/block}

@@ -3,11 +3,10 @@
     <div id="login" class="page">
         <h1 n:block="title">Přihlásit se</h1>
        
-        <div class="content">
+        <div class="container">
             {if !$user->loggedIn}
                 {control signInForm}
             {/if}
-            
         </div>
     </div>
 {/block}
