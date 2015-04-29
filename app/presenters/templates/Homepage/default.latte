@@ -1,29 +1,33 @@
 {block content}
-    
-    <div id="homepage" class="page">
+
+<div id="homepage" class="page">
+    {if $user->loggedIn}
         <h1 n:block="title">PA036 - Pharmacy</h1>
-        
-        <div class="logo">
-            <img src="images/logo.jpg" alt="logo">
-        </div>
-        
+        <li><a n:href="Sign:out">Odhlásit</a></li>
         <div class="content">
             <a class="box" href="#">
-                    <img src="images/sklad.png" alt="sklad">
-                    <h2>Skladová evidence</h2>
+                <img src="images/sklad.png" alt="sklad">
+                <h2>Skladová evidence</h2>
             </a>
             <a class="box" href="#">
                 <img src="images/pokladna.png" alt="pokladna">
                 <h2>Pokladniční systém</h2>
             </a>
-            
-            
+
+
             {foreach $tovary as $tovar}
-            <div style="text-align: left;">
-                <p><a href="{link Tovar:show $tovar->id_tovar}">{$tovar->nazov}</a></p>
-            </div>
+                <div style="text-align: left;">
+                    <p><a href="{link Tovar:show $tovar->id_tovar}">{$tovar->nazov}</a></p>
+                </div>
             {/foreach}
-            
+
         </div>
-    </div>
+
+
+    {else}
+        <div class="content">
+        <li><a n:href="Sign:in">Přihlásit do Systému</a></li>
+        {/if}
+        </div>
+</div>
 {/block}

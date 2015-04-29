@@ -15,7 +15,7 @@ class TovarPresenter extends BasePresenter
     }
 
     public function renderShow($id_tovar)
-    {
+    {  
         $tovar = $this->database->table('tovar')->get($id_tovar);
         if (!$tovar) {
             $this->error('Stránka nebyla nalezena');
