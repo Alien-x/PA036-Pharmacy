@@ -2,8 +2,8 @@ parameters:
 
 
 database:
-	dsn: 'pgsql:host=127.0.0.1;dbname=pa036'
-	user: 'postgres'
-	password: 'postgres'
+	dsn: 'pgsql:host=postgresql.websupport.sk;port=5432;dbname=postgre_pharmacy'
+	user: 'postgre_pharmacy'
+	password: 'pharmacy'
 	options:
 		lazy: yes
