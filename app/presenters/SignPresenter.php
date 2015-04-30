@@ -32,9 +32,8 @@ class SignPresenter extends BasePresenter {
         $form->addPassword('password', 'Heslo:')
                 ->setRequired('Prosím vyplňte své heslo.')->getControlPrototype()->setClass('form-control');
 
-        $form->addCheckbox('remember', 'Zůstat přihlášen')->getControlPrototype()->setClass('form-control');
 
-        $form->addSubmit('send', 'Přihlásit')->getControlPrototype()->setClass('btn-primary');
+        $form->addSubmit('send', 'Přihlásit')->getControlPrototype()->setClass('btn btn-primary');
   
         $this->form = $form;
         $this->form->onSuccess[] = array($this, 'signInFormSucceeded');

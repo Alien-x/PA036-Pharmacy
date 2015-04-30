@@ -1,3 +1,4 @@
+
 body {
 	font-size: 15px;
 	line-height: 1.6;
@@ -9,31 +10,57 @@ body {
 .page {
     position: relative;
     margin: 0 auto;
-}
-
-#homepage.page,
-#login.page {
     width:970px;
     text-align: center;
 }
 
-#homepage h1 {
-    display: none;
-    color: red;
+.navbar-header .navbar-brand {
+    padding:10px;
+    margin: 0;
 }
 
-#login .logo,
-#homepage .logo,
-#homepage .content {
-    width: 100%;
+.navbar-header .navbar-brand img {
+    height: 30px;
+    width: auto;
+}
+
+.navbar .navbar-right .user {
+    color: #9d9d9d;
+    height: 30px;
+    display: inline-block;
+    padding: 10px;
+}
+
+.navbar .navbar-right strong {
+    
+}
+
+/*** sign in form ***/
+.signIn {
+    text-align: center;
+    width: auto;
+    display: inline-block;
+    margin-top: 30px;
+}
+
+.signIn form {
     margin: 0 auto;
 }
 
-#login .logo img,
-#homepage .logo img {
-    width: 600px;
-    margin: 20px auto 30px;
+.signIn th {
+    vertical-align: middle;
+    padding-right: 15px;
 }
+
+.signIn td {
+    text-align: left;
+    padding: 3px;
+}
+
+
+
+
+
 
 #homepage .content a.box {
     background: #e6e6e6;
@@ -57,7 +84,6 @@ body {
 
 
 #homepage .content .box img {
-    /*max-width: 250px;*/
     height: 160px;
     margin: 0;
     padding: 0;
