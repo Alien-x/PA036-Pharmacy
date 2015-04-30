@@ -26,7 +26,7 @@ abstract class Repository extends Nette\Object
         // the name of table is extract from the name of class
         // removes namespace and the backslash
         if(is_null($className)) {
-            $className = substr(get_class($this), strrpos(get_class($this), '\\') + 1);
+            $className = strtolower(substr(get_class($this), strrpos(get_class($this), '\\') + 1));
         }
         
         return $this->connection->table($className);
@@ -48,6 +48,15 @@ abstract class Repository extends Nette\Object
     public function findBy(array $by)
     {
         return $this->getTable()->where($by);
+    }
+    
+    /**
+     * Returns rows restricted by filter, e.g. array('name' => 'John').
+     * @return Nette\Database\Table\Selection
+     */
+    public function findByID($value)
+    {   
+        return $this->getTable()->get($value);
     }
 
 }

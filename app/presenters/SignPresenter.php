@@ -15,10 +15,6 @@ class SignPresenter extends BasePresenter {
     public $factory;
     public $form;
     
-    public function __construct(Nette\Database\Context $database) {
-        parent::__construct($database);
-        
-    }
 
     /**
      * Sign-in form factory.

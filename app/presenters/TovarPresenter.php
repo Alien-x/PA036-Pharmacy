@@ -9,21 +9,20 @@ class TovarPresenter extends BasePresenter
 {
     /** @var Pharmacy\Tovar */
     private $tovar;
-
-    public function __construct(Nette\Database\Context $database)
-    {
-        parent::__construct($database);
-    }
     
     /** startup */
     protected function startup() {
         parent::startup();
-        $this->tovar = Nette\Environment::getService('tovar');
+        $this->tovar = $this->getModel('tovar');
+    }
+
+    public function renderDefault()
+    {  
+        $this->template->tovary = $this->tovar->printAll();
     }
     
-
     public function renderShow($id_tovar)
-    {  
+    {
         $this->template->tovar = $this->tovar->printByID($id_tovar);
     }
 }

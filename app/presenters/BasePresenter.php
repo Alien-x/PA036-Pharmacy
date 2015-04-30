@@ -11,13 +11,10 @@ use Nette,
  */
 class BasePresenter extends Nette\Application\UI\Presenter {
 
-    /** @var Nette\Database\Context */
-    protected $database;
-
-    public function __construct(Nette\Database\Context $database)
-    {
-        $this->database = $database;
+    protected function getModel($serviceName) {
+        return Nette\Environment::getService($serviceName);
     }
+    
     /*
     protected function createComponentLoginForm()
     {
