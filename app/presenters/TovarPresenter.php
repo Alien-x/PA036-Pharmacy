@@ -7,20 +7,23 @@ use Nette,
 
 class TovarPresenter extends BasePresenter
 {
-    /** @var Nette\Database\Context */
+    /** @var Pharmacy\Tovar */
+    private $tovar;
 
     public function __construct(Nette\Database\Context $database)
     {
         parent::__construct($database);
     }
+    
+    /** startup */
+    protected function startup() {
+        parent::startup();
+        $this->tovar = Nette\Environment::getService('tovar');
+    }
+    
 
     public function renderShow($id_tovar)
     {  
-        $tovar = $this->database->table('tovar')->get($id_tovar);
-        if (!$tovar) {
-            $this->error('Stránka nebyla nalezena');
-        }
-        
-        $this->template->tovar = $tovar;
+        $this->template->tovar = $this->tovar->printByID($id_tovar);
     }
 }

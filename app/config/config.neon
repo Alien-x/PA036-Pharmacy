@@ -24,6 +24,9 @@ services:
 	- App\Forms\SignFormFactory
 	router: App\RouterFactory::createRouter
 
+	# model classes
+	tovar: Pharmacy\Tovar
+
 security:
     users:
         admin: admin  # user 'admin', password 'admin'
