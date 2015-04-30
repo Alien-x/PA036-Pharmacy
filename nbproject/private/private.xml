@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/PA036-Pharmacy/.gitignore</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/projects/PA036-Pharmacy/app/presenters/templates/Sign/in.latte</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/projects/PA036-Pharmacy/app/presenters/templates/Tovar/show.latte</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/projects/PA036-Pharmacy/app/presenters/templates/Homepage/default.latte</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/projects/PA036-Pharmacy/app/config/config.local.neon</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/projects/PA036-Pharmacy/www/css/layout.css</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/projects/PA036-Pharmacy/app/presenters/SignPresenter.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/projects/PA036-Pharmacy/app/presenters/templates/@layout.latte</file>
+            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/projects/PA036-Pharmacy/app/model/UserManager.php</file>
         </group>
     </open-files>
 </project-private>

@@ -1,0 +1,70 @@
+/*
+ * style.css
+ *
+ *  Zde jsou styly pro jednotlivé induvuduální 
+ *  stránky (homepage, přihlašování, pokladna, atd.).
+*/
+
+/*
+ * sign in form 
+*/
+.signIn {
+    text-align: center;
+    width: auto;
+    display: inline-block;
+    margin-top: 30px;
+}
+
+.signIn form {
+    margin: 0 auto;
+}
+
+.signIn th {
+    vertical-align: middle;
+    padding-right: 15px;
+}
+
+.signIn td {
+    text-align: left;
+    padding: 3px;
+}
+
+/*
+ * homepage
+*/
+.homepage {
+    margin-top: 50px;
+}
+
+.homepage a.box {
+    background: #e6e6e6;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    width: 250px;
+    display: inline-block;
+    padding: 30px 0 10px;
+    margin: 0 20px 0 0;
+}
+.homepage a.box,
+.homepage a.box:hover {
+    text-decoration: none;
+    color: #333;
+}
+
+.homepage a.box:hover {
+    background: #eee;
+}
+
+.homepage .box img {
+    height: 160px;
+    margin: 0;
+    padding: 0;
+}
+
+.homepage .box h2 {
+    font-size: 38px;
+    font-weight: bold;
+    color: #aaa;
+    padding: 0 10px;
+}
