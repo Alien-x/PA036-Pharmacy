@@ -1,0 +1,27 @@
+{block content}
+
+   <h1>Štatistika zamestnancov za určité obdobie </h1>
+{control statForm}
+<table id="table_id" class="display">    
+                <thead>        
+                    <tr>
+                        <th>Meno</th>
+                        <th>Priezvisko</th>
+                        <th>Titul</th>
+                        <th>Počet faktur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $lekarnikci as $lekarnik}
+                    <tr>
+                        <td><p>{$lekarnik->meno}</p></td>
+                        <td><p>{$lekarnik->priezvisko}</p></td>
+                        <td><p>{$lekarnik->titul}</p></td>
+                        <td><p>{$lekarnik->pocet}</p></td>
+                    </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+
+
+{/block}
