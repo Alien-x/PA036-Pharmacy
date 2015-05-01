@@ -1,6 +1,6 @@
 log/*
 temp/*
-nbproject/*
+nbproject
 vendor/*
 !vendor/others
 
