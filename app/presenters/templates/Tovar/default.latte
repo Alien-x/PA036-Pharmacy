@@ -13,18 +13,20 @@
                         <th>Predpis</th>
                         <th>Aktívny</th>
                         <th>Počet</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {foreach $tovary as $tovar}
                     <tr>
-                        <td><p>{$tovar->id_tovar}</p></td>
+                        <td>{$tovar->id_tovar}</td>
                         <td><p><a href="{link Tovar:show $tovar->id_tovar}">{$tovar->nazov}</a></p></td>
                         <td><p>{$tovar->cena}</p></td>
                         <td><p>{$tovar->doplatok}</p></td>
                         <td><p>{$tovar->na_predpis}</p></td>
                         <td><p>{$tovar->aktivny}</p></td>
                         <td><p>{$tovar->mnozstvo}</p></td>
+                        <td><a href="#" class="btn btn-primary">Namarkovat</a></td>
                     </tr>
                     {/foreach}
                 </tbody>
