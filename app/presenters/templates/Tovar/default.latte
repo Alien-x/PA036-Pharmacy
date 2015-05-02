@@ -1,7 +1,10 @@
 {block content}
 
     <h1 n:block="title">Tovary</h1>
+    <div class="form-group">
     {control skupinaForm}
+    </div>
+    <!--<?php if(isset($post)) print_r($post); ?> -->
     <hr>
     <table id="table_id" class="display">    
                 <thead>        
@@ -12,6 +15,8 @@
                         <th>Doplatok</th>
                         <th>Predpis</th>
                         <th>Aktívny</th>
+                        <th>Doplnkovy</th>
+                        <th>Ucinna l.</th>
                         <th>Počet</th>
                         <th></th>
                     </tr>
@@ -23,9 +28,11 @@
                         <td><p><a href="{link Tovar:show $tovar->id_tovar}">{$tovar->nazov}</a></p></td>
                         <td><p>{$tovar->cena}</p></td>
                         <td><p>{$tovar->doplatok}</p></td>
-                        <td><p>{$tovar->na_predpis}</p></td>
-                        <td><p>{$tovar->aktivny}</p></td>
-                        <td><p>{$tovar->mnozstvo}</p></td>
+                        <td><p><?php if($tovar->na_predpis==1)echo "ano"; else echo "nie";?></p></td>
+                        <td><p><?php if($tovar->aktivny==1)echo "ano"; else echo "nie";?></p></td>
+                        <td><p><?php if($tovar->doplnkovy_tovar==1)echo "ano"; else echo "nie";?></p></td>
+                        <td><p><a href="#">{$tovar->id_ucinna}</a></p></td>
+                        <td><p>{$tovar->pocet}</p></td>
                         <td><a href="#" class="btn btn-primary">Namarkovat</a></td>
                     </tr>
                     {/foreach}
