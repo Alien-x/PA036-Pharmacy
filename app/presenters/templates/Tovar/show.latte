@@ -1,8 +1,68 @@
 {block content}
 
-<h1 n:block="title">Tovar</h1>
+<div class="row">
 
-<p><a n:href="Tovar:default">← zpět na výpis příspěvků</a></p>
+    <!-- Blog Post Content Column -->
+    <div class="col-lg-8">
 
-<div>{$tovar->nazov}</div>
+        <!-- Blog Post -->
+
+        <!-- Title -->
+        <h1 class="float_left_p">{$tovar->nazov}</h1>
+        <p class="lead">
+            {$tovar->skupina_nazov}
+        </p>
+        <hr>
+        <div class="well">
+
+            <div class="row"><h2 class="col-lg-6">Informácie</h2></div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <ul class="list-unstyled">
+                        <li><p class="float_left_p"><b>Názov: </b>{$tovar->nazov}</p></li>
+                        <li><p  class="float_left_p"><b>Výrobca: </b>{$tovar->drzitel}</p></li>
+                        <li><p  class="float_left_p"><b>Skupina: </b>{$tovar->skupina_nazov}</p></li>
+                        <li><p  class="float_left_p"><b>Balenie: </b>{$tovar->jednotka}</p></li>
+                        <li><p  class="float_left_p"><b>Mnozstvo: </b>{$tovar->mnozstvo}</p></li>
+                        <li><p  class="float_left_p"><b>Kusov na sklade: </b>{$tovar->pocet}</p></li>
+                        {if !$tovar->doplnkovy_tovar}<li><p class="float_left_p"><b>Ucinna latka: </b>{$tovar->id_ucinna.' - '.$tovar->ucinna_nazov}</p></li>{/if}
+                        <br />
+                        <li><p class="float_left_p"><b>Produkt je aktívny: {if $tovar->aktivny}ano{else}ne{/if}</h4>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row"><h2 class="col-lg-2">Popis</h2></div>
+        <div class="lead"><p class="popis">{$tovar->popis}</p></div>
+        <hr>
+        <br />
+        <div class="row"><h2 class="col-lg-2">Užitie</h2></div>
+        <p class="lead"><p class="popis">{$tovar->uzitie}</p></p>
+    </div>
+
+    <!-- Blog Sidebar Widgets Column -->
+    <div class="col-md-4">
+        <div class="well">
+            <h2>Faktúra</h2>
+            <div class="row"><p ><b>Cena: </b>{$tovar->cena} €</p></div>
+            <div class="row"><p ><b>Na predpis: </b>{if $tovar->na_predpis }ano{else}ne{/if}</p></div>
+            {if $tovar->na_predpis}
+                <div class="row"><p ><b>Balenie: </b>{$tovar->doplatok} €</p></div>
+            {/if}
+
+        </div>
+        {if !$tovar->doplnkovy_tovar}
+            <div class="well">
+                <h2>Kombinácie</h2>
+                <p ><a href="#">Nevhodné kombinácie</a></p>
+                <p ><a href="#">Náhrady</a></p>
+            </div>
+        {/if}
+    </div>
+
+    <hr>
+</div>
+</div>
 
