@@ -31,7 +31,7 @@
                         <td><p><?php if($tovar->na_predpis==1)echo "ano"; else echo "nie";?></p></td>
                         <td><p><?php if($tovar->aktivny==1)echo "ano"; else echo "nie";?></p></td>
                         <td><p><?php if($tovar->doplnkovy_tovar==1)echo "ano"; else echo "nie";?></p></td>
-                        <td><p><a href="#">{$tovar->id_ucinna}</a></p></td>
+                        <td><p><a href="{link Tovar:nahrada null, $tovar->id_ucinna}">{$tovar->id_ucinna}</a></p></td>
                         <td><p>{$tovar->pocet}</p></td>
                         <td><a href="#" class="btn btn-primary">Namarkovat</a></td>
                     </tr>
