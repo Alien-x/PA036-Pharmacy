@@ -33,15 +33,14 @@
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
               {if $user->loggedIn}
-                <!--<li class="dropdown">
-                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pokladniční systém <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Page 1-1</a></li>
-                    <li><a href="#">Page 1-2</a></li>
-                    <li><a href="#">Page 1-3</a></li>
+                    <li><a n:href="Tovar:default">Tovary</a></li>
+                    <li><a href="#">Namarkované zboží</a></li>
+                    <li><a href="#">Faktury</a></li>
                   </ul>
-                </li>-->
-                <li><a n:href="Tovar:default">Pokladniční systém</a></li>
+                </li>
                 <li><a href="#">Skladová evidencia</a></li>
                 <li><a n:href="Statistika:default">Štatistika zamestnancov</a></li>
               {/if}
