@@ -81,10 +81,15 @@ class TovarPresenter extends BasePresenter {
         
         
         $this->template->latka = $this->db->query('select * from ucinna_latka where id_ucinna = ?',$id_ucinna)->fetch();
-        $this->template->tovary = $this->db->query('select t.id_tovar,t.nazov, t.cena, t.na_predpis, t.doplatok, t.popis, t.doplnkovy_tovar, t.aktivny, t.pocet, t.drzitel, id_skupina , ol.id_ucinna 
+        $this->template->tovary = $this->db->query('select t.id_tovar, t.nazov, t.cena, t.na_predpis, t.doplatok, t.popis, t.doplnkovy_tovar, t.aktivny, t.pocet, t.drzitel, id_skupina , ol.id_ucinna 
                 from tovar t 
                 LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
-                JOIN obsah_latok ol ON(ol.id_liek = l.id_liek) where ol.id_ucinna = ?', $id_ucinna);
+                JOIN obsah_latok ol ON(ol.id_liek = l.id_liek)
+		where ol.id_ucinna = ?', $id_ucinna);
+    }
+    
+    public function renderNevhodne(){
+        
     }
 
 }
