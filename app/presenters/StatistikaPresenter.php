@@ -9,51 +9,47 @@ use Nette,
 
 class StatistikaPresenter extends BasePresenter {
 
-    private $database;
-    private $values;
-    public function __construct(Nette\Database\Context $database)
-    {
-        $this->database = $database;
+    /** @var Pharmacy\Tovar */
+    private $lekarnik;
+    
+    /** startup */
+    protected function startup() {
+        parent::startup();
+        // get model
+        $this->lekarnik = $this->getModel('lekarnik');
     }
   
-public function renderDefault(){
+    public function renderDefault(){
     
-    $this->template->lekarnikci = $this->database->query("select meno,priezvisko,titul, count(*) as pocet from lekarnik l,faktura f,faktura_polozka fp
-    where l.id_lekarnik = f.id_lekarnik and f.id_faktura= fp.id_faktura
-    group by meno,priezvisko,titul
-    order by pocet;");
-    
+        $this->template->lekarnikci = $this->lekarnik->printLekarniciFaktury();
     }
     
     protected function createComponentStatForm()
-{
-    $form = new Form;
-    $form->addText('od', 'Od dátumu:')
-        ->setRequired();
-    $form->addText('doo', 'Po dátum:')
-        ->setRequired();
-   
+    {
+        $form = new Form;
+        $form->addText('od', 'Od dátumu:')
+            ->setRequired();
+        $form->addText('doo', 'Po dátum:')
+            ->setRequired();
 
-    $form->addSubmit('send', 'Uložit a publikovat');
-    
-    $form->onSuccess[] = array($this, 'volajEdit');
 
-    return $form;
-}
+        $form->addSubmit('send', 'Uložit a publikovat');
 
-public function volajEdit($form){
-    $values = $form->getValues();
-    $this->redirect('Statistika:edit',  $values->od,$values->doo);
-}
+        $form->onSuccess[] = array($this, 'volajEdit');
 
-public function renderEdit($od,$doo){
-    
-    
-    $this->template->lekarnikci = $this->database->query("select meno,priezvisko,titul, count(*) as pocet from lekarnik l,faktura f,faktura_polozka fp
-    where l.id_lekarnik = f.id_lekarnik and f.id_faktura= fp.id_faktura and  cas_vystavenia > to_date(?, 'DD.MM.YYYY') and cas_vystavenia < to_date(?, 'DD.MM.YYYY')
-group by meno,priezvisko,titul;",$od,$doo);
-    
-}
+        return $form;
+    }
+
+    public function volajEdit($form){
+        
+        $values = $form->getValues();
+        $this->redirect('Statistika:edit', $values->od, $values->doo);
+    }
+
+    public function renderEdit($od,$doo){
+        
+        $this->template->lekarnikci = $this->lekarnik->printLekarniciFaktury($od, $doo);
+    }
 
 
 }

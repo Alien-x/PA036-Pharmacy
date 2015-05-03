@@ -1,5 +1,7 @@
 {block content}
 
+{control cartControl}
+
     <h1 n:block="title">Tovary</h1>
     <div class="form-group">
     {control skupinaForm}
@@ -33,7 +35,7 @@
                         <td><p><?php if($tovar->doplnkovy_tovar==1)echo "ano"; else echo "nie";?></p></td>
                         <td><p><a href="{link Tovar:nahrada null, $tovar->id_ucinna}">{$tovar->id_ucinna}</a></p></td>
                         <td><p>{$tovar->pocet}</p></td>
-                        <td><a href="#" class="btn btn-primary">Namarkovat</a></td>
+                        <td><a n:href="Tovar:namarkovat $tovar->id_tovar" class="btn btn-primary">Namarkovat</a></td>
                     </tr>
                     {/foreach}
                 </tbody>

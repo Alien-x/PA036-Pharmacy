@@ -1,0 +1,20 @@
+
+{snippet}
+
+<div class="cart">
+    <div class="box">
+        <h3>Namarkované zboží</h3>
+        {if count($zbozi)}
+            <ul class="list items">
+                {foreach $zbozi as $item}
+                <li>{$item['nazov']}</li>
+                {/foreach}
+            </ul>
+        {else}
+            <em>Není namarkováno žádné zboží</em>   
+        {/if}
+    </div>
+</div>
+
+
+{/snippet}

@@ -26,6 +26,7 @@ services:
 
 	# model classes
 	tovar: Pharmacy\Tovar
+	lekarnik: Pharmacy\Lekarnik
 
 security:
     users:

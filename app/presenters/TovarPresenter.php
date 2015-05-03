@@ -9,56 +9,76 @@ class TovarPresenter extends BasePresenter {
 
     /** @var Pharmacy\Tovar */
     private $tovar;
-    private $db;
-
-    public function __construct(Nette\Database\Context $database) {
-        $this->db = $database;
-    }
+    
+    private $sessionCart;
 
     /** startup */
     protected function startup() {
         parent::startup();
+        // get model
         $this->tovar = $this->getModel('tovar');
+        
+        // get cart
+        $this->sessionCart = $this->getSession('cartSection');
+        if(!is_array($this->sessionCart->zbozi)) {
+            $this->sessionCart->zbozi = array();
+        }
     }
 
     public function renderDefault() {
         $post = $this->getHttpRequest()->getPost();
 
         $this->template->post = $post;
-        if (isset($post['indikacna_skupina']) && $post['indikacna_skupina'] != null && $post['indikacna_skupina'] != 0)
-            $this->template->tovary = $this->db->query('select t.id_tovar,t.nazov, t.cena, t.na_predpis, t.doplatok, t.popis, t.doplnkovy_tovar, t.aktivny, t.pocet, t.drzitel, id_skupina , ol.id_ucinna 
-                from tovar t 
-                LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
-                JOIN obsah_latok ol ON(ol.id_liek = l.id_liek)
-                where id_skupina = ?', $post['indikacna_skupina']);
-        else if (isset($post['indikacna_skupina']) && $post['indikacna_skupina'] == 0)
-            $this->template->tovary = $this->db->query("select t.id_tovar,t.nazov, t.cena, t.na_predpis, t.doplatok, t.popis, t.doplnkovy_tovar, t.aktivny, t.pocet, t.drzitel, id_skupina , ol.id_ucinna 
-                from tovar t 
-                LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
-                JOIN obsah_latok ol ON(ol.id_liek = l.id_liek)
-                where t.doplnkovy_tovar = true");
-        else
-            $this->template->tovary = $this->db->query('select t.id_tovar,t.nazov, t.cena, t.na_predpis, t.doplatok, t.popis, t.doplnkovy_tovar, t.aktivny, t.pocet, t.drzitel, id_skupina , ol.id_ucinna 
-                from tovar t 
-                LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
-                JOIN obsah_latok ol ON(ol.id_liek = l.id_liek)');
+            
+        $this->template->tovary = $this->tovar->printAll(
+                isset($post['indikacna_skupina']),
+                (isset($post['indikacna_skupina']) ? $post['indikacna_skupina'] : false)
+            );
     }
 
     public function renderShow($id_tovar) {
-        $this->template->tovar = $this->db->query('select  t.id_tovar, t.nazov, t.cena, t.na_predpis, t.doplatok, t.popis, t.doplnkovy_tovar, t.aktivny,
- t.pocet, t.drzitel, i.nazov as skupina_nazov, ol.id_ucinna, ul.popis as ucinna_nazov, t.mnozstvo, t.uzitie, m.nazov as jednotka
-                from tovar t 
-                LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
-                JOIN obsah_latok ol ON (ol.id_liek = l.id_liek)
-		JOIN mnozstvo_forma m ON (m.id_forma = t.id_forma)
-		JOIN indikacna_skupina i ON(i.id_skupina = l.id_skupina)
-		JOIN ucinna_latka ul ON(ul.id_ucinna =ol.id_ucinna)
-		where  t.id_tovar = ?', $id_tovar)->fetch();
+        $this->template->tovar = $this->tovar->printByID($id_tovar);
     }
 
-    protected function createComponentSkupinaForm() {
+    public function renderNahrada($id_tovar, $id_ucinna) {
+        if(!isset($id_ucinna) && isset($id_tovar)){
+            $tovar = $this->tovar->printNahrada($id_tovar);
+            $this->template->tovar = $tovar;
+            $id_ucinna = $tovar['id_ucinna'];
+        }
+        
+        
+        $this->template->latka = $this->tovar->printUcinnaLatka($id_ucinna);
+        $this->template->tovary = $this->tovar->printNahrady($id_ucinna);
+    }
+    
+    public function renderNamarkovat($id_tovar) {
+        
+        $tovar = $this->tovar->printByID($id_tovar);
+        
+        $zbozi = array();
+        $zbozi['ID'] = $tovar->id_tovar;
+        $zbozi['nazov'] = $tovar->nazov;
+        $zbozi['cena'] = $tovar->cena;
+        
+        $this->sessionCart->zbozi[] = $zbozi;
+        
+        $this->redirect('Tovar:default');
+    }
+    
+    public function renderNevhodne()
+    {
+        
+    }
+    
+    /*
+     * Components
+     */
+    
+    protected function createComponentSkupinaForm() 
+    {
 
-        $skupina = $this->db->table('indikacna_skupina')->fetchPairs('id_skupina', 'nazov');
+        $skupina = $this->tovar->printIndikacneSkupiny();
         array_unshift($skupina, 'Doplnky');
 
         $form = new Form;
@@ -68,23 +88,16 @@ class TovarPresenter extends BasePresenter {
         return $form;
     }
 
-    public function skupinaFormSucceeded($form, $values) {
+    public function skupinaFormSucceeded($form, $values) 
+    {
         
     }
 
-    public function renderNahrada($id_tovar, $id_ucinna) {
-        if(!isset($id_ucinna) && isset($id_tovar)){
-        $tovar = $this->db->query('select t.nazov, t. id_tovar, t.cena, o.id_ucinna, u.popis from tovar t join liek l on(t.id_tovar = l.id_liek) join obsah_latok o on (o.id_liek = l.id_liek) join ucinna_latka u on (u.id_ucinna = o.id_ucinna) where t.id_tovar=?', $id_tovar)->fetch();
-        $this->template->tovar = $tovar;
-        $id_ucinna = $tovar['id_ucinna'];
-        }
-        
-        
-        $this->template->latka = $this->db->query('select * from ucinna_latka where id_ucinna = ?',$id_ucinna)->fetch();
-        $this->template->tovary = $this->db->query('select t.id_tovar,t.nazov, t.cena, t.na_predpis, t.doplatok, t.popis, t.doplnkovy_tovar, t.aktivny, t.pocet, t.drzitel, id_skupina , ol.id_ucinna 
-                from tovar t 
-                LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
-                JOIN obsah_latok ol ON(ol.id_liek = l.id_liek) where ol.id_ucinna = ?', $id_ucinna);
+    protected function createComponentCartControl()
+    {
+        $cart = new \App\Components\CartControl($this->sessionCart);
+        $cart->redrawControl();
+        return $cart;
     }
 
 }
