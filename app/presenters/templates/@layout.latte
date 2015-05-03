@@ -10,7 +10,7 @@
     <script src="{$basePath}/js/bootstrap.min.js"></script>
 
     <!-- DataTables CSS -->
-    <link rel="stylesheet" type="text/css" href="{$basePath}/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="{$basePath}/css/jquery.dataTables.min.css">
 
     <link rel="stylesheet" href="{$basePath}/css/layout.css">
     <link rel="stylesheet" href="{$basePath}/css/style.css">
@@ -81,7 +81,8 @@
    <!-- scripts -->
     {block scripts}
         <script src="{$basePath}/js/netteForms.min.js"></script>
-        <!-- DataTables --><script type="text/javascript" charset="utf8" src="{$basePath}/js/jquery.dataTables.js"></script>
+        <!-- DataTables -->
+        <script type="text/javascript" charset="utf8" src="{$basePath}/js/jquery.dataTables.js"></script>
         <script src="{$basePath}/js/main.js"></script>
         <script>$(document).ready(function () {
                 $('#table_id').DataTable();
