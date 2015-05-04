@@ -57,9 +57,11 @@ class TovarPresenter extends BasePresenter {
         $tovar = $this->tovar->printByID($id_tovar);
         
         $zbozi = array();
-        $zbozi['ID'] = $tovar->id_tovar;
+        $zbozi['id_tovar'] = $tovar->id_tovar;
         $zbozi['nazov'] = $tovar->nazov;
         $zbozi['cena'] = $tovar->cena;
+        $zbozi['doplatok'] = $tovar->doplatok;
+        $zbozi['odkaz'] = $this->link('Tovar:show', $id_tovar);
         
         $this->sessionCart->zbozi[] = $zbozi;
         

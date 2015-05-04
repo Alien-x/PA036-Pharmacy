@@ -5,14 +5,25 @@
     <div class="box">
         <h3>Namarkované zboží</h3>
         {if count($zbozi)}
-            <ul class="list items">
+            <table>
+                <tr>
+                    <th class="nazev">Nazov</th>
+                    <th class="cena">Cena</th>
+                    <th class="cena">Doplatok</th>
+                </tr>
                 {foreach $zbozi as $item}
-                <li>{$item['nazov']}</li>
+                <tr>
+                    <td class="nazev"><a href="{$item['odkaz']}" title="{$item['nazov']}">{$item['nazov']|truncate:50}</a></td>
+                    <td class="cena">{$item['cena']}</td>
+                    <td class="cena">{$item['doplatok']}</td>
+                </tr>
                 {/foreach}
-            </ul>
+            </table>
         {else}
             <em>Není namarkováno žádné zboží</em>   
         {/if}
+        
+        <h4><a class="btn btn-success" href="{$odkazNamarkovane}">Vystavit fakturu &raquo;</a></h4>
     </div>
 </div>
 

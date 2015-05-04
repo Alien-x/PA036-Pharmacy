@@ -101,6 +101,7 @@
     display: inline-block;
     padding: 5px;
     border-radius: 10px;
+    position: relative;
 }
 
 .cart .box h3 {
@@ -110,6 +111,18 @@
     border-bottom: 1px dotted black;
 }
 
-.cart .box ul li {
+.cart .box th,
+.cart .box td {
     text-align: left;
+    padding-right: 10px; 
 }
+
+.cart .box .cena {
+    font-weight: bold;
+}
+
+.cart .box h4 {
+    border-top: 1px dotted black;
+    padding-top: 5px;
+}
+
