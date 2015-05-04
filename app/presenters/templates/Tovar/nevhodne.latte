@@ -1,1 +1,48 @@
 {block content}
+
+{control cartControl}
+
+<div class="row">
+    <h2 >Nevhodné kombinácie učinných látok</h2>
+    <div class="well">
+        <p class="text-left"><b>Ucinna latka: <b> {$latka->id_ucinna.' - '.$latka->popis}</p>
+
+
+                    </div>
+
+                    <hr>
+
+                    </div>
+
+                    <table id="table_id" class="display">    
+                        <thead>        
+                            <tr>
+                                <th>Názov</th>
+                                <th>Cena</th>
+                                <th>Doplatok</th>
+                                <th>Predpis</th>
+                                <th>Aktívny</th>
+                                <th>Doplnkovy</th>
+                                <th>Ucinna l.</th>
+                                <th>Počet</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {foreach $tovary as $tovar}
+                                <tr>
+                                    <td><p><a href="{link Tovar:show $tovar->id_tovar}">{$tovar->nazov}</a></p></td>
+                                    <td><p>&euro; {$tovar->cena}</p></td>
+                                    <td><p>&euro; {$tovar->doplatok}</p></td>
+                                    <td><p><?php if($tovar->na_predpis==1)echo "ano"; else echo "nie";?></p></td>
+                                    <td><p><?php if($tovar->aktivny==1)echo "ano"; else echo "nie";?></p></td>
+                                    <td><p><?php if($tovar->doplnkovy_tovar==1)echo "ano"; else echo "nie";?></p></td>
+                                    <td><p><a href="#">{$tovar->id_ucinna}</a></p></td>
+                                    <td><p>{$tovar->pocet}</p></td>
+                                    <td><a n:href="Tovar:namarkovat $tovar->id_tovar" class="btn btn-primary">Namarkovat</a></td>
+                                </tr>
+                            {/foreach}
+                        </tbody>
+                    </table>
+                    <br />
+                    <blockquote><h5 class="popis"><b>Generická náhrada </b>je vykonaná náhrada liečiva farmaceutom (napr. originálneho prípravku alebo akéhokoľvek tzv. "brand name" prípravku) za iný (napr. generický liek) obsahujúci rovnakú účinnou látku.</h5></blockquote>

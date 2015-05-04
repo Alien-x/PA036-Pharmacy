@@ -86,9 +86,15 @@ class TovarPresenter extends BasePresenter {
         $this->redirect('Tovar:default');
     }
     
-    public function renderNevhodne()
-    {
+    public function renderNevhodne ($id_tovar, $id_ucinna) {
+        if(!isset($id_ucinna) && isset($id_tovar)){
+            $tovar = $this->tovar->printNahrada($id_tovar);
+            $this->template->tovar = $tovar;
+            $id_ucinna = $tovar['id_ucinna'];
+        }
         
+        $this->template->latka = $this->tovar->printUcinnaLatka($id_ucinna);
+        $this->template->tovary = $this->tovar->printZleKombinacie($id_ucinna);
     }
     
     /*
