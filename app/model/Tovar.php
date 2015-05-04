@@ -88,6 +88,18 @@ class Tovar extends Repository {
                 where id_ucinna = ?', $id_ucinna)->fetch();
     }
 
+    //mal by byt zvlast servis ucinna
+    public function printUcinna() {
+        return $this->connection->query('
+                select id_ucinna, (id_ucinna|| ? || popis)as popis from ucinna_latka',' - ')->fetchPairs('id_ucinna', 'popis');
+    }
+    
+    //mal by byt zvlast servis mnozstvo forma
+    public function printForma(){
+         return $this->getTable('mnozstvo_forma')
+                        ->fetchPairs('id_forma', 'nazov');
+    }
+
     public function printNahrady($id_ucinna) {
         return $this->connection->query('
                 select t.id_tovar,t.nazov, t.cena, t.na_predpis, t.doplatok, 
