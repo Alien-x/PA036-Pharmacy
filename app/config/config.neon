@@ -27,6 +27,11 @@ services:
 	# model classes
 	tovar: Pharmacy\Tovar
 	lekarnik: Pharmacy\Lekarnik
+	faktura: Pharmacy\Faktura
+                
+#faktura: Pharmacy\Faktura
+
+
 
 security:
     users:

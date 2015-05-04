@@ -1,0 +1,29 @@
+{block content}
+
+   <h1>Vypis faktury číslo: {$id} </h1>
+
+<table id="table_id" class="display">    
+                <thead>        
+                    <tr>
+                        <th>Názov lieku</th>
+                        <th>Počet</th>
+                        <th>Cena</th>
+                        <th>Doplatok</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $faktury as $faktura}
+                    <tr>
+                        <td><p>{$faktura->nazov}</p></td>
+                        <td><p>{$faktura->pocet}</p></td>
+                        <td><p>{$faktura->cena}</p></td>
+                        <td><p>{$faktura->doplatok}</p></td>
+                    </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+
+
+
+
+{/block}

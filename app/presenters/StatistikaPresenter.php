@@ -33,7 +33,7 @@ class StatistikaPresenter extends BasePresenter {
             ->setRequired();
 
 
-        $form->addSubmit('send', 'Uložit a publikovat');
+        $form->addSubmit('send', 'Zobrazit');
 
         $form->onSuccess[] = array($this, 'volajEdit');
 

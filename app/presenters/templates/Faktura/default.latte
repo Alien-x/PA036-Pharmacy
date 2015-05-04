@@ -1,0 +1,28 @@
+{block content}
+
+   <h1>Faktury</h1>
+
+<table id="table_id" class="display">    
+                <thead>        
+                    <tr>
+                        <th>Faktura</th>
+                        <th>Meno</th>
+                        <th>Priezvisko</th>
+                        <th>Cena</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $faktury as $faktura}
+                    <tr>
+
+                        <td><p><a href="{link Faktura:show $faktura->id_faktura}">{$faktura->id_faktura}</a></p></td>
+                        <td><p>{$faktura->meno}</p></td>
+                        <td><p>{$faktura->priezvisko}</p></td>
+                        <td><p>{$faktura->cena}</p></td>
+                    </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+
+
+{/block}
