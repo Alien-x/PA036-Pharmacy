@@ -14,8 +14,8 @@
                 {foreach $zbozi as $item}
                 <tr>
                     <td class="nazev"><a href="{$item['odkaz']}" title="{$item['nazov']}">{$item['nazov']|truncate:50}</a></td>
-                    <td class="cena">{$item['cena']}</td>
-                    <td class="cena">{$item['doplatok']}</td>
+                    <td class="cena">&euro; {$item['cena']}</td>
+                    <td class="cena">&euro; {$item['doplatok']}</td>
                 </tr>
                 {/foreach}
             </table>

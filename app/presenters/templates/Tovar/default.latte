@@ -11,7 +11,6 @@
     <table id="table_id" class="display">    
                 <thead>        
                     <tr>
-                        <th>#ID</th>
                         <th>Názov</th>
                         <th>Cena</th>
                         <th>Doplatok</th>
@@ -26,10 +25,9 @@
                 <tbody>
                     {foreach $tovary as $tovar}
                     <tr>
-                        <td>{$tovar->id_tovar}</td>
                         <td><p><a href="{link Tovar:show $tovar->id_tovar}">{$tovar->nazov}</a></p></td>
-                        <td><p>{$tovar->cena}</p></td>
-                        <td><p>{$tovar->doplatok}</p></td>
+                        <td><p>&euro; {$tovar->cena}</p></td>
+                        <td><p>&euro; {$tovar->doplatok}</p></td>
                         <td><p><?php if($tovar->na_predpis==1)echo "ano"; else echo "nie";?></p></td>
                         <td><p><?php if($tovar->aktivny==1)echo "ano"; else echo "nie";?></p></td>
                         <td><p><?php if($tovar->doplnkovy_tovar==1)echo "ano"; else echo "nie";?></p></td>
