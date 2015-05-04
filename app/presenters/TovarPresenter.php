@@ -62,8 +62,26 @@ class TovarPresenter extends BasePresenter {
         $zbozi['cena'] = $tovar->cena;
         $zbozi['doplatok'] = $tovar->doplatok;
         $zbozi['odkaz'] = $this->link('Tovar:show', $id_tovar);
+        $zbozi['odmarkovat'] = $this->link('Tovar:odmarkovat', $id_tovar);
         
         $this->sessionCart->zbozi[] = $zbozi;
+        
+        $this->redirect('Tovar:default');
+    }
+    
+    public function renderOdmarkovat($id_tovar) {
+        
+        $zbozi = null;
+        
+        foreach($this->sessionCart->zbozi as $item) {
+            if($item['id_tovar'] == $id_tovar) {
+                $zbozi = $item;
+            }
+        }
+        
+        if(($key = array_search($zbozi, $this->sessionCart->zbozi)) !== false) {
+            unset($this->sessionCart->zbozi[$key]);
+        }
         
         $this->redirect('Tovar:default');
     }

@@ -126,3 +126,9 @@
     padding-top: 5px;
 }
 
+.cart .box .odmarkovat {
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+}
+
