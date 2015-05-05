@@ -144,18 +144,7 @@ class Tovar extends Repository {
             LEFT JOIN obsah_latok o on (l.id_liek = o.id_liek)
              where t.id_tovar = ?', $id)->fetch();
     }
-    
-        public function tovarExistsn($id) {
-        return $this->connection->query('
-             select t.doplnkovy_tovar, t.id_tovar, t.nazov, t.cena, t.na_predpis,
-            t.doplatok, t.popis , t.aktivny, t.pocet, t.drzitel, t.mnozstvo,
-            l.id_skupina, o.id_ucinna, t.min_pocet, t.id_forma, t.uzitie
-            from tovar t LEFT JOIN liek l ON(l.id_tovar = t.id_tovar) 
-            LEFT JOIN obsah_latok o on (l.id_liek = o.id_liek)
-             where t.id_tovar = ?', $id);
-    }
 
-    
     public function tovarUpdate($data, $id){
         return $this->connection->table('tovar')->where('id_tovar',$id)->update($data);
     }
