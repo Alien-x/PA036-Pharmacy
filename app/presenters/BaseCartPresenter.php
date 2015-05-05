@@ -56,6 +56,11 @@ class BaseCartPresenter extends BasePresenter {
         unset($this->sessionCart->zbozi[$itemID]);
     }
     
+    protected function removeAllZboziFromCart() {
+        
+        $this->sessionCart->zbozi = array();
+    }
+    
     protected function assignReceptToZboziInCart($itemID, $id_recept) {
         
         $this->sessionCart->zbozi[$itemID]['id_recept'] = $id_recept;

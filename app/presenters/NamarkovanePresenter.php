@@ -23,6 +23,13 @@ class NamarkovanePresenter extends BaseCartPresenter {
         $this->redirect('Namarkovane:default');
     }
     
+    public function renderVyprazdnit() {
+        
+        $this->removeAllZboziFromCart();
+        
+        $this->redirect('Namarkovane:default');
+    }
+    
 
 
 }

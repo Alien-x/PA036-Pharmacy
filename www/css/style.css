@@ -137,3 +137,16 @@ td.konecna-cena {
     font-weight: bold;
 }
 
+
+.buttons {
+    margin-top: 2em;
+}
+
+.buttons .left {
+    float: left;
+}
+
+.buttons .right {
+    float: right;
+}
+
