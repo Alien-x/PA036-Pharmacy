@@ -20,7 +20,7 @@
                 <tbody>
                     {foreach $tovary as $tovar}
                     <tr>
-                        <td><p><a href="{link Tovar:show $tovar->id_tovar}">{$tovar->nazov}</a></p></td>
+                        <td><p><a href="{link Sklad:edit $tovar->id_tovar}">{$tovar->nazov}</a></p></td>
                         <td><p>&euro; {$tovar->cena}</p></td>
                         <td><p>&euro; {$tovar->doplatok}</p></td>
                         <td><p><?php if($tovar->na_predpis==1)echo "ano"; else echo "nie";?></p></td>
@@ -28,7 +28,7 @@
                         <td><p><?php if($tovar->doplnkovy_tovar==1)echo "ano"; else echo "nie";?></p></td>
                         <td><p><a href="{link Tovar:nahrada null, $tovar->id_ucinna}">{$tovar->id_ucinna}</a></p></td>
                         <td><p>{$tovar->pocet}</p></td>
-                        <td><a href="#" class="btn btn-danger">Odstrániť</a></td>
+                        <td><a href="{link Sklad:edit $tovar->id_tovar}" class="btn btn-danger">Odstrániť</a></td>
                         
                     </tr>
                     {/foreach}

@@ -56,30 +56,43 @@ class SkladPresenter extends BasePresenter {
                 ->addConditionOn($form['je_liek'], Form::EQUAL, TRUE)->setRequired('Vyberte jednu zo skupín !');
 
 
-        $form->addSubmit('insert', 'Pridaj')->getControlPrototype()->setClass('form-control btn btn-primary');
+        $form->addSubmit('insert', 'OK')->getControlPrototype()->setClass('form-control btn btn-primary');
         $form->onSuccess[] = array($this, 'insertFormSucceeded');
         return $form;
     }
 
     public function insertFormSucceeded($form, $values) {
         //musime z formulara odfiltrovat atributy pre tabulku liek a spravit zvlast insert
-        $liek = array();
-        array_push($liek, $values['id_skupina'], $values['id_ucinna']);
+        $tovar = $values;
+        unset($tovar['je_liek']);
+        unset($tovar['id_skupina']);
+        unset($tovar['id_ucinna']);
+        $id_tovar = $this->getParameter('id_tovar');
+        
+        if ($id_tovar) {
+            $this->tovar->tovarUpdate($tovar, $id_tovar);
+            //$this->tovar->insertLiek($id_tovar, $values['id_skupina'], $values['id_ucinna']);
+        } else {
+            $id_tovar = $this->tovar->insertTovar($tovar);
+            if (isset($values['je_liek'])) {
+                $this->tovar->insertLiek($id_tovar, $values['id_skupina'], $values['id_ucinna']);
+            }
+        }
 
-        unset($values['je_liek']);
-        unset($values['id_skupina']);
-        unset($values['id_ucinna']);
-
-        $this->tovar->insertTovar($values);
-        $this->tovar->insertLiek($liek);
-
-
-        $this->flashMessage("Tovar <b>".$values['nazov']."</b> bol úspešne vložený.", 'success');
+        $this->flashMessage("Tovar " . $id_tovar . " '" . $values['nazov'] . "' bol úspešne spracovaný.", 'success');
         $this->redirect('default');
     }
-    
-    public function actionEdit($postId){
-        //to-do, podla tutorialu spravit update, spravit selekt na vsetky potrebne hodnoty, alebo pouzit, uz vytvoreny..
-     }
+
+    public function actionEdit($id_tovar) {
+        $tovar = $this->tovar->tovarExists($id_tovar);
+        $this->template->values = $tovar;
+        if (!$tovar)
+            $this->error('Nieje možné nájsť požadovaný tovar');
+
+        if (isset($tovar['id_ucinna']))
+            $tovar['je_liek'] = true;
+
+        $this['insertForm']->setDefaults($tovar);
+    }
 
 }

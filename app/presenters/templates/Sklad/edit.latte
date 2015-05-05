@@ -1,6 +1,5 @@
 
 {block content}
-<div><?php if(isset($values)) print_r($values); ?></div>
 <div class="container signIn">
     {form insertForm}
         <table>
@@ -14,7 +13,7 @@
             </tr>
             <tr>
                 <th>{label na_predpis/}</th>
-                <td>{input na_predpis id=>'na_predpis', class=>'form-control'}</td>
+                <td class='checkbox'>{input na_predpis id=>'na_predpis', class=>'form-control'}</td>
             </tr>
 
             <tr class="hide_predpis">
@@ -31,11 +30,11 @@
             </tr>
             <tr>
                 <th>{label doplnkovy_tovar/}</th>
-                <td>{input doplnkovy_tovar class=>'form-control'}</td>
+                <td class='checkbox'>{input doplnkovy_tovar class=>'form-control'}</td>
             </tr>
             <tr>
                 <th>{label aktivny/}</th>
-                <td>{input aktivny class=>'form-control'}</td>
+                <td class='checkbox'>{input aktivny class=>'form-control'}</td>
             </tr>
             <tr>
                 <th>{label id_forma/}</th>
@@ -59,7 +58,7 @@
             </tr>
             <tr>
                 <th>{label je_liek/}</th>
-                <td>{input je_liek id=>'je_liek', class=>'form-control'}</td>
+                <td class='checkbox'>{input je_liek id=>'je_liek', class=>'form-control'}</td>
             </tr>
             
                 <tr class="hide_liek">

@@ -18,7 +18,7 @@ class Tovar extends Repository {
                     id_skupina , ol.id_ucinna 
                 from tovar t 
                 LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
-                JOIN obsah_latok ol ON(ol.id_liek = l.id_liek)
+                LEFT JOIN obsah_latok ol ON(ol.id_liek = l.id_liek)
                 where id_skupina = ?', $indikacna_skupina);
         } elseif ($isset && $indikacna_skupina == 0) {
             return $this->connection->query('
@@ -27,7 +27,7 @@ class Tovar extends Repository {
                     id_skupina , ol.id_ucinna 
                 from tovar t 
                 LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
-                JOIN obsah_latok ol ON(ol.id_liek = l.id_liek)
+                LEFT JOIN obsah_latok ol ON(ol.id_liek = l.id_liek)
                 where t.doplnkovy_tovar = true');
         } else {
             return $this->connection->query('
@@ -36,7 +36,7 @@ class Tovar extends Repository {
                     id_skupina , ol.id_ucinna 
                 from tovar t 
                 LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
-                JOIN obsah_latok ol ON(ol.id_liek = l.id_liek)');
+                LEFT JOIN obsah_latok ol ON(ol.id_liek = l.id_liek)');
         }
     }
 
@@ -76,7 +76,7 @@ class Tovar extends Repository {
                     id_skupina , ol.id_ucinna 
                 from tovar t 
                 LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
-                JOIN obsah_latok ol ON(ol.id_liek = l.id_liek) 
+                LEFT JOIN obsah_latok ol ON(ol.id_liek = l.id_liek) 
                 where ol.id_ucinna in (
 			select id_ucinna_2 as id_ucinna from zla_kombinacia where id_ucinna_1 = ?
                         )', $id_ucinna);
@@ -91,12 +91,12 @@ class Tovar extends Repository {
     //mal by byt zvlast servis ucinna
     public function printUcinna() {
         return $this->connection->query('
-                select id_ucinna, (id_ucinna|| ? || popis)as popis from ucinna_latka',' - ')->fetchPairs('id_ucinna', 'popis');
+                select id_ucinna, (id_ucinna|| ? || popis)as popis from ucinna_latka', ' - ')->fetchPairs('id_ucinna', 'popis');
     }
-    
+
     //mal by byt zvlast servis mnozstvo forma
-    public function printForma(){
-         return $this->getTable('mnozstvo_forma')
+    public function printForma() {
+        return $this->getTable('mnozstvo_forma')
                         ->fetchPairs('id_forma', 'nazov');
     }
 
@@ -115,24 +115,48 @@ class Tovar extends Repository {
         return $this->getTable('indikacna_skupina')
                         ->fetchPairs('id_skupina', 'nazov');
     }
-    
-    public function insertTovar($data){
-        $this->connection->table('tovar')->insert($data);
+
+    public function insertTovar($data) {
+        return $this->connection->table('tovar')->uinsert($data);
     }
-    
-    public function insertLiek($data){
-        $this->connection->table('liek')->insert($data);
+
+    public function insertLiek($id_tovar, $id_skupina, $id_ucinna) {
+        $this->connection->query('select insert_liek(?,?,?)', $id_tovar, $id_skupina, $id_ucinna);
     }
 
     public function printBestsellers($od = null, $doo = null) {
-         return $this->connection->query("
+        return $this->connection->query("
             select t.nazov, t.id_tovar, t.cena, sum(fp.pocet) as pocetBest
             from tovar t, faktura_polozka fp, faktura f
             where fp.id_tovar = t.id_tovar and fp.id_faktura = f.id_faktura
             and cas_vystavenia >= to_date(?, 'DD.MM.YYYY')
             and cas_vystavenia <= to_date(?, 'DD.MM.YYYY')
             group by t.nazov, t.id_tovar, t.cena
-            ORDER BY pocetBest DESC" , $od, $doo);  
+            ORDER BY pocetBest DESC", $od, $doo);
+    }
+
+    public function tovarExists($id) {
+        return $this->connection->query('
+             select t.doplnkovy_tovar, t.id_tovar, t.nazov, t.cena, t.na_predpis,
+            t.doplatok, t.popis , t.aktivny, t.pocet, t.drzitel, t.mnozstvo,
+            l.id_skupina, o.id_ucinna, t.min_pocet, t.id_forma, t.uzitie
+            from tovar t LEFT JOIN liek l ON(l.id_tovar = t.id_tovar) 
+            LEFT JOIN obsah_latok o on (l.id_liek = o.id_liek)
+             where t.id_tovar = ?', $id)->fetch();
     }
     
+        public function tovarExistsn($id) {
+        return $this->connection->query('
+             select t.doplnkovy_tovar, t.id_tovar, t.nazov, t.cena, t.na_predpis,
+            t.doplatok, t.popis , t.aktivny, t.pocet, t.drzitel, t.mnozstvo,
+            l.id_skupina, o.id_ucinna, t.min_pocet, t.id_forma, t.uzitie
+            from tovar t LEFT JOIN liek l ON(l.id_tovar = t.id_tovar) 
+            LEFT JOIN obsah_latok o on (l.id_liek = o.id_liek)
+             where t.id_tovar = ?', $id);
+    }
+
+    
+    public function tovarUpdate($data, $id){
+        return $this->connection->table('tovar')->where('id_tovar',$id)->update($data);
+    }
 }
