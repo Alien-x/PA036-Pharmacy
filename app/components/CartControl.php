@@ -25,7 +25,7 @@ class CartControl extends Control
         $template = $this->template;
         
         // odkazy
-        $template->odkazNamarkovane = $this->getPresenter()->link('Tovar:default');
+        $template->odkazNamarkovane = $this->getPresenter()->link('Namarkovane:default');
         
         // template
         $template->zbozi = $this->sessionSection->zbozi;

@@ -85,3 +85,7 @@ form .error {
 	color: #D00;
 	font-weight: bold;
 }
+
+th, td {
+    text-align: left;
+}
