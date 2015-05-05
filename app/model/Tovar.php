@@ -99,6 +99,15 @@ class Tovar extends Repository {
         return $this->getTable('mnozstvo_forma')
                         ->fetchPairs('id_forma', 'nazov');
     }
+    
+    
+    public function printIdLiek(){
+         return $this->connection->query('select l.id_tovar,nazov from tovar t join liek l on(t.id_tovar=l.id_tovar)')->fetchPairs('id_tovar','nazov');
+    }
+    
+    public function inserSamotnytLiek($sn,$time,$FK){
+        $this->connection->query('insert into samotny_liek values(?,TIMESTAMP ?,CURRENT_TIMESTAMP,?)',$sn,$time,$FK);
+    }
 
     public function printNahrady($id_ucinna) {
         return $this->connection->query('

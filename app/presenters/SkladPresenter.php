@@ -29,21 +29,24 @@ class SkladPresenter extends BasePresenter {
         
     }
 
-    protected function createComponentInsertLiekForm() {
-        $liek = $this->tovar->printForma();
+    protected function createComponentInsertLiekForm(){
+        $liek1 = $this->tovar->printIdLiek();
         $form = new Form;
-        $form->addText('sn', 'Serial Number: ')->setRequired();
-        $form->addText('expire', 'Expiracia: ')->setRequired();
-        $form->addSelect('liek', 'Liek: ')->setItems($liek)->setPrompt('Vyberte jednu')->setRequired();
-
-        $form->addSubmit('vlozit', 'Vložiť');
+        $form->addText('sn', 'Serial Number :')->setRequired();
+        $form->addText('expire', 'Expiracia :')->setRequired();
+        $form->addSelect('liek', 'Liek :')->setItems($liek1)->setPrompt('Vyberte jednu')->setRequired();
+        
         $form->addSubmit('insert', 'Pridaj')->getControlPrototype()->setClass('form-control btn btn-primary');
-
+        $form->onSuccess[] = array($this, 'insertLiekFormSucceeded');
         return $form;
     }
-
-    public function insertLiekFormSucceeded($form, $values) {
-        
+    
+    public function insertLiekFormSucceeded($form) {
+        $values = $form->getValues();
+        $this->tovar->inserSamotnytLiek($values->sn,$values->expire,$values->liek);
+        $this->flashMessage("Liek bol úspešne vložený.", 'success');
+        $this->redirect('default');
+    
     }
 
     protected function createComponentInsertForm() {
