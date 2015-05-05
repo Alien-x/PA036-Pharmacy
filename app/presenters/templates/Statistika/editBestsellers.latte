@@ -1,0 +1,24 @@
+{block content}
+<h1>Štatistika najpredávanejších produktov</h1>
+
+
+{control statFormBestsellers}
+<table id="table_id" class="display">    
+                <thead>        
+                    <tr>
+                        <th>Názov</th>
+                        <th>Cena</th>
+                        <th>Pocet</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $tovary as $tovar}
+                    <tr>
+                        <td><p><a href="{link Tovar:show $tovar->id_tovar}">{$tovar->nazov}</a></p></td>
+                        <td><p>{$tovar->cena}</p></td>
+                        <td><p>{$tovar->pocetBest}</p></td>
+                    </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+{/block}
