@@ -1,0 +1,54 @@
+{block content}
+
+    <h1 n:block="title">Namarkované zboží</h1>
+   
+    {if count($zbozi)}
+        <table class="table table-striped">
+            <tr>
+                <th>Nazov</th>
+                <th>Cena</th>
+                <th>Doplatok</th>
+                <th>Způsob hrazení</th>
+                <th>Konečná cena</th>
+                <th>Recept</th>
+                <th></th>
+            </tr>
+            {foreach $zbozi as $item}
+            <tr>
+                <td><a href="{$item['odkaz']}" title="{$item['nazov']}">{$item['nazov']|truncate:50}</a></td>
+                <td>&euro; {$item['cena']}</td>
+                <td>&euro; {$item['doplatok']}</td>
+                <td>{$item['uhrada']}</td>
+                <td class="konecna-cena">
+                    &euro; 
+                    {if $item['uhrada'] == 'P'}
+                        {$item['cena']}
+                    {elseif $item['uhrada'] == 'C'}
+                        {$item['cena'] - $item['doplatok']} 
+                    {else}
+                        0
+                    {/if}
+                </td>
+                <td>
+                    {if $item['id_recept']}
+                        # {$item['id_recept']}
+                    {else}
+                        <a class="btn btn-primary" n:href="Recept:priradit $item['itemID']">Přiřadit recept</a>
+                    {/if}
+                </td>
+                <td><a class="odmarkovat" n:href="Namarkovane:odmarkovat $item['itemID']">x</a></td>
+            </tr>
+            {/foreach}
+        </table>
+        
+        <div class="buttons">
+            <a class="btn btn-danger left" n:href="Namarkovane:vyprazdnit">Vyprázdnit namarkované zboží</a>
+            <a class="btn btn-success right" href="#">Vytvořit fakturu</a>
+        </div>
+    {else}
+        <em>Není namarkováno žádné zboží</em>   
+    {/if}
+    
+    
+
+{/block}

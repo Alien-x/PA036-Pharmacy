@@ -102,6 +102,7 @@
     padding: 5px;
     border-radius: 10px;
     position: relative;
+    min-width: 350px;
 }
 
 .cart .box h3 {
@@ -126,9 +127,26 @@
     padding-top: 5px;
 }
 
-.cart .box .odmarkovat {
+.odmarkovat {
     color: red;
     text-decoration: none;
     font-weight: bold;
+}
+
+td.konecna-cena {
+    font-weight: bold;
+}
+
+
+.buttons {
+    margin-top: 2em;
+}
+
+.buttons .left {
+    float: left;
+}
+
+.buttons .right {
+    float: right;
 }
 

@@ -28,6 +28,7 @@ services:
 	tovar: Pharmacy\Tovar
 	lekarnik: Pharmacy\Lekarnik
 	faktura: Pharmacy\Faktura
+	recept: Pharmacy\Recept
                 
 #faktura: Pharmacy\Faktura
 

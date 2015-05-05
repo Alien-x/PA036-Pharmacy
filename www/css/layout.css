@@ -46,6 +46,23 @@ body {
 /*
  * forms, flashmessage, spinner
 */
+.center {
+    text-align: center;
+}
+
+.center form {
+    text-align: center;
+}
+
+.center form table {
+    margin: 2em auto;
+}
+
+.center form table th,
+.center form table td {
+    padding: 5px;
+}
+
 #ajax-spinner {
 	margin: 15px 0 0 15px;
 	padding: 13px;
@@ -84,4 +101,8 @@ form .required label {
 form .error {
 	color: #D00;
 	font-weight: bold;
+}
+
+th, td {
+    text-align: left;
 }

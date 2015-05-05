@@ -5,24 +5,17 @@ namespace App\Presenters;
 use Nette,
     Nette\Application\UI\Form;
 
-class TovarPresenter extends BasePresenter {
+class TovarPresenter extends BaseCartPresenter {
 
     /** @var Pharmacy\Tovar */
     private $tovar;
     
-    private $sessionCart;
-
+    
     /** startup */
     protected function startup() {
         parent::startup();
         // get model
         $this->tovar = $this->getModel('tovar');
-        
-        // get cart
-        $this->sessionCart = $this->getSession('cartSection');
-        if(!is_array($this->sessionCart->zbozi)) {
-            $this->sessionCart->zbozi = array();
-        }
     }
 
     public function renderDefault() {
@@ -56,32 +49,20 @@ class TovarPresenter extends BasePresenter {
         
         $tovar = $this->tovar->printByID($id_tovar);
         
-        $zbozi = array();
-        $zbozi['id_tovar'] = $tovar->id_tovar;
-        $zbozi['nazov'] = $tovar->nazov;
-        $zbozi['cena'] = $tovar->cena;
-        $zbozi['doplatok'] = $tovar->doplatok;
-        $zbozi['odkaz'] = $this->link('Tovar:show', $id_tovar);
-        $zbozi['odmarkovat'] = $this->link('Tovar:odmarkovat', $id_tovar);
+        $this->addZboziToCart(
+            $tovar->id_tovar, 
+            $tovar->nazov,
+            $tovar->cena,
+            $tovar->doplatok
+            );
         
-        $this->sessionCart->zbozi[] = $zbozi;
         
         $this->redirect('Tovar:default');
     }
     
-    public function renderOdmarkovat($id_tovar) {
+    public function renderOdmarkovat($itemID) {
         
-        $zbozi = null;
-        
-        foreach($this->sessionCart->zbozi as $item) {
-            if($item['id_tovar'] == $id_tovar) {
-                $zbozi = $item;
-            }
-        }
-        
-        if(($key = array_search($zbozi, $this->sessionCart->zbozi)) !== false) {
-            unset($this->sessionCart->zbozi[$key]);
-        }
+        $this->removeZboziFromCart($itemID);
         
         $this->redirect('Tovar:default');
     }
@@ -121,7 +102,7 @@ class TovarPresenter extends BasePresenter {
 
     protected function createComponentCartControl()
     {
-        $cart = new \App\Components\CartControl($this->sessionCart);
+        $cart = new \App\Components\CartControl($this->getCartZbozi());
         $cart->redrawControl();
         return $cart;
     }

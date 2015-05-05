@@ -1,0 +1,37 @@
+{block content}
+
+    <h1 n:block="title">Recepty</h1>
+
+    <hr>
+    <table id="table_id" class="display">    
+                <thead>        
+                    <tr>
+                        <th>#</th>
+                        <th>Rodné číslo</th>
+                        <th>Datum vydání</th>
+                        <th>Jméno</th>
+                        <th>Příjmení</th>
+                        <th>Adresa</th>
+                        <th>Způsob úhrady</th>
+                        <th>Užití</th>
+                        <th>Vydal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $recepty as $recept}
+                    <tr>
+                        <td>{$recept->id_recept}</td>
+                        <td>{$recept->rodne_cislo}</td>
+                        <td>{$recept->dat_vydania}</td>
+                        <td>{$recept->pacient_meno}</td>
+                        <td>{$recept->pacient_priezvisko}</td>
+                        <td>{$recept->pacient_adresa}</td>
+                        <td>{$recept->sposob_uhrady}</td>
+                        <td>{$recept->uzitie}</td>
+                        <td>{$recept->vydal}</td>
+                    </tr>
+                    {/foreach}
+                </tbody>
+    </table>
+
+{/block}
