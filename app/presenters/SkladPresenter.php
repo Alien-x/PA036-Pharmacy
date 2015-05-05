@@ -3,7 +3,8 @@
 namespace App\Presenters;
 
 use Nette,
-    Nette\Application\UI\Form, Nette\Forms\Validator;
+    Nette\Application\UI\Form,
+    Nette\Forms\Validator;
 
 class SkladPresenter extends BasePresenter {
 
@@ -17,6 +18,10 @@ class SkladPresenter extends BasePresenter {
     }
 
     public function renderDefault() {
+        $this->template->tovary = $this->tovar->printAll(null, null);
+    }
+
+    public function renderAdd() {
         
     }
 
@@ -31,7 +36,7 @@ class SkladPresenter extends BasePresenter {
         //obecny formular
         //
         $form->addText('nazov', 'Názov: ')->setRequired();
-        $form->addText('cena', 'Cena: ')->addRule(Form::FLOAT, "§§§§");
+        $form->addText('cena', 'Cena: ')->addRule(Form::FLOAT);
         $form->addCheckbox('na_predpis', 'Na predpis: ');
         $form->addText('doplatok', 'Doplatok: ')->addConditionOn($form['na_predpis'], Form::EQUAL, TRUE)->setRequired('Vyberte jednu zo skupín !');
         $form->addText('popis', 'Popis: ')->setRequired();
@@ -39,10 +44,10 @@ class SkladPresenter extends BasePresenter {
         $form->addCheckbox('doplnkovy_tovar', 'Doplnkový tovar: ');
         $form->addCheckbox('aktivny', 'Aktívny: ');
         $form->addSelect('id_forma', 'Forma tovaru: ')->setItems($mnozstvo_forma)->setPrompt('Vyberte jednu')->setRequired();
-        $form->addText('mnozstvo', 'Množstvo: ')->setRequired();
+        $form->addText('mnozstvo', 'Množstvo: ')->addRule(Form::FLOAT);
         $form->addText('drzitel', 'Držitel: ')->setRequired();
         $form->addText('uzitie', 'Užitie: ')->setRequired();
-        $form->addText('pocet', 'Počet: ')->setRequired();
+        $form->addText('pocet', 'Počet: ')->addRule(Form::INTEGER);
         //formular pre liek
         $form->addCheckbox('je_liek', 'Je liek: ');
         $form->addSelect('id_skupina', 'Skupina tovaru:')->setItems($skupina)->setPrompt('Vyberte jednu')
@@ -57,8 +62,20 @@ class SkladPresenter extends BasePresenter {
     }
 
     public function insertFormSucceeded($form, $values) {
-        $this->template->values = $form->values;
-        
+        //musime z formulara odfiltrovat atributy pre tabulku liek a spravit zvlast insert
+        $liek = array();
+        array_push($liek, $values['id_skupina'], $values['id_ucinna']);
+
+        unset($values['je_liek']);
+        unset($values['id_skupina']);
+        unset($values['id_ucinna']);
+
+        $this->tovar->insertTovar($values);
+        $this->tovar->insertLiek($liek);
+
+
+        $this->flashMessage("Tovar <b>".$values['nazov']."</b> bol úspešne vložený.", 'success');
+        $this->redirect('default');
     }
 
 }
