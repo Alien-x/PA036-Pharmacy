@@ -116,4 +116,15 @@ class Tovar extends Repository {
                         ->fetchPairs('id_skupina', 'nazov');
     }
 
+    public function printBestsellers($od = null, $doo = null) {
+         return $this->connection->query("
+            select t.nazov, t.id_tovar, t.cena, sum(fp.pocet) as pocetBest
+            from tovar t, faktura_polozka fp, faktura f
+            where fp.id_tovar = t.id_tovar and fp.id_faktura = f.id_faktura
+            and cas_vystavenia >= to_date(?, 'DD.MM.YYYY')
+            and cas_vystavenia <= to_date(?, 'DD.MM.YYYY')
+            group by t.nazov, t.id_tovar, t.cena
+            ORDER BY pocetBest DESC" , $od, $doo);  
+    }
+    
 }
