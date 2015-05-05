@@ -77,5 +77,9 @@ class SkladPresenter extends BasePresenter {
         $this->flashMessage("Tovar <b>".$values['nazov']."</b> bol úspešne vložený.", 'success');
         $this->redirect('default');
     }
+    
+    public function actionEdit($postId){
+        //to-do, podla tutorialu spravit update, spravit selekt na vsetky potrebne hodnoty, alebo pouzit, uz vytvoreny..
+     }
 
 }
