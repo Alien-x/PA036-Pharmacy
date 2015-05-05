@@ -1,5 +1,6 @@
 
 {block content}
+<div><?php if(isset($values)) print_r($values); ?></div>
 <div class="container signIn">
     {form insertForm}
         <table>
@@ -80,6 +81,8 @@
     {/form}    
 </div>
 <script>
+    
+    
     // hiding elements
     $(".hide_liek").hide();
         $("input[name = 'je_liek']").click(function (){
