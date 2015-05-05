@@ -115,6 +115,14 @@ class Tovar extends Repository {
         return $this->getTable('indikacna_skupina')
                         ->fetchPairs('id_skupina', 'nazov');
     }
+    
+    public function insertTovar($data){
+        $this->connection->table('tovar')->insert($data);
+    }
+    
+    public function insertLiek($data){
+        $this->connection->table('liek')->insert($data);
+    }
 
     public function printBestsellers($od = null, $doo = null) {
          return $this->connection->query("

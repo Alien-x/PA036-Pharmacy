@@ -1,0 +1,102 @@
+
+{block content}
+<div><?php if(isset($values)) print_r($values); ?></div>
+<div class="container signIn">
+    {form insertForm}
+        <table>
+            <tr class="required">
+                <th>{label nazov/}</th>
+                <td>{input nazov class=>'form-control'}</td>
+            </tr> 
+            <tr>
+                <th>{label cena/}</th>
+                <td>{input cena class=>'form-control'}</td>
+            </tr>
+            <tr>
+                <th>{label na_predpis/}</th>
+                <td class='checkbox'>{input na_predpis id=>'na_predpis'}</td>
+            </tr>
+
+            <tr class="hide_predpis">
+                <th>{label doplatok/}</th>
+                <td>{input doplatok class=>'form-control'}</td>
+            </tr>
+            <tr>
+                <th>{label popis/}</th>
+                <td>{input popis class=>'form-control'}</td>
+            </tr>
+            <tr>
+                <th>{label min_pocet/}</th>
+                <td>{input min_pocet class=>'form-control'}</td>
+            </tr>
+            <tr>
+                <th>{label doplnkovy_tovar/}</th>
+                <td class='checkbox'>{input doplnkovy_tovar }</td>
+            </tr>
+            <tr>
+                <th >{label aktivny/}</th>
+                <td class='checkbox'>{input aktivny class=>'form-control'}</td>
+            </tr>
+            <tr>
+                <th>{label id_forma/}</th>
+                <td>{input id_forma class=>'form-control'}</td>
+            </tr>
+            <tr>
+                <th>{label mnozstvo/}</th>
+                <td>{input mnozstvo class=>'form-control'}</td>
+            </tr>
+            <tr>
+                <th>{label drzitel/}</th>
+                <td>{input drzitel class=>'form-control'}</td>
+            </tr>
+            <tr>
+                <th>{label uzitie/}</th>
+                <td>{input uzitie class=>'form-control'}</td>
+            </tr>
+            <tr>
+                <th>{label pocet/}</th>
+                <td>{input pocet class=>'form-control'}</td>
+            </tr>
+            <tr>
+                <th>{label je_liek/}</th>
+                <td class='checkbox'>{input je_liek id=>'je_liek'}</td>
+            </tr>
+            
+                <tr class="hide_liek">
+                    <th>{label id_skupina/}</th>
+                    <td>{input id_skupina class=>'form-control'}</td>
+                </tr>
+                <tr class="hide_liek">
+                    <th>{label id_ucinna/}</th>
+                    <td>{input id_ucinna class=>'form-control'}</td>
+                </tr>
+            
+            <tr>
+                <th></th>
+                <td>{input insert}</td>
+            </tr>
+
+        </table>
+
+    {/form}    
+</div>
+<script>
+    
+    
+    // hiding elements
+    $(".hide_liek").hide();
+        $("input[name = 'je_liek']").click(function (){
+           $(".hide_liek").toggle(this.checked); 
+    })
+  
+    $(".hide_predpis").hide();
+        $("input[name = 'na_predpis']").click(function (){
+           $(".hide_predpis").toggle(this.checked); 
+    })
+  
+</script>
+<br/>
+<br/>
+<br/>
+<br/>
+
