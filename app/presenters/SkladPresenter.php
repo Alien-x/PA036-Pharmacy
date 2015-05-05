@@ -24,12 +24,16 @@ class SkladPresenter extends BasePresenter {
     public function renderAdd() {
         
     }
+    public function renderAddLiek() {
+        
+    }
 
     protected function createComponentInsertForm() {
 
         $skupina = $this->tovar->printIndikacneSkupiny();
         $ucinne_latky = $this->tovar->printUcinna();
         $mnozstvo_forma = $this->tovar->printForma();
+        
         //array_unshift($skupina, 'Doplnky');
 
         $form = new Form;
@@ -76,6 +80,23 @@ class SkladPresenter extends BasePresenter {
 
         $this->flashMessage("Tovar <b>".$values['nazov']."</b> bol úspešne vložený.", 'success');
         $this->redirect('default');
+    }
+    
+    protected function createComponentInsertLiekForm(){
+        $liek = $this->tovar->printForma();
+        $form = new Form;
+        $form->addText('sn', 'Serial Number: ')->setRequired();
+        $form->addText('expire', 'Expiracia: ')->setRequired();
+        $form->addSelect('liek', 'Liek: ')->setItems($liek)->setPrompt('Vyberte jednu')->setRequired();
+        
+        $form->addSubmit('vlozit', 'Vložiť');
+        $form->addSubmit('insert', 'Pridaj')->getControlPrototype()->setClass('form-control btn btn-primary');
+        
+        return $form;
+    }
+    
+    public function insertLiekFormSucceeded($form, $values) {
+    
     }
     
     public function actionEdit($postId){

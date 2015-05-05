@@ -1,0 +1,48 @@
+
+{block content}
+<div><?php if(isset($values)) print_r($values); ?></div>
+<div class="container signIn">
+    {form insertLiekForm}
+    
+        <table>
+            <tr class="required">
+                <th>{label sn/}</th>
+                <td>{input sn class=>'form-control'}</td>
+            </tr> 
+            <tr>
+                <th>{label expire/}</th>
+                <td>{input expire class=>'form-control'}</td>
+            </tr>
+             <tr>
+                <th>{label liek/}</th>
+                <td>{input liek class=>'form-control'}</td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>{input insert}</td>
+            </tr>
+
+        </table>
+
+    {/form}    
+</div>
+<script>
+    
+    
+    // hiding elements
+    $(".hide_liek").hide();
+        $("input[name = 'je_liek']").click(function (){
+           $(".hide_liek").toggle(this.checked); 
+    })
+  
+    $(".hide_predpis").hide();
+        $("input[name = 'na_predpis']").click(function (){
+           $(".hide_predpis").toggle(this.checked); 
+    })
+  
+</script>
+<br/>
+<br/>
+<br/>
+<br/>
+
