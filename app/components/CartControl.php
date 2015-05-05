@@ -9,15 +9,13 @@ use Nette\Application\UI\Control;
  */
 class CartControl extends Control
 {
-    /** @var Nette\Http\SessionSection */
-    private $sessionSection;
+    private $zbozi;
     
-    
-    public function __construct(\Nette\Http\SessionSection $sessionSection)
+    public function __construct($zbozi)
     {
         parent::__construct();
 
-        $this->sessionSection = $sessionSection;
+        $this->zbozi = $zbozi;
     }
     
     public function render()
@@ -28,7 +26,7 @@ class CartControl extends Control
         $template->odkazNamarkovane = $this->getPresenter()->link('Namarkovane:default');
         
         // template
-        $template->zbozi = $this->sessionSection->zbozi;
+        $template->zbozi = $this->zbozi;
         $template->setFile(__DIR__ . '/CartControl.latte');
 
         $template->render();

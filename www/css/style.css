@@ -127,9 +127,13 @@
     padding-top: 5px;
 }
 
-.cart .box .odmarkovat {
+.odmarkovat {
     color: red;
     text-decoration: none;
+    font-weight: bold;
+}
+
+td.konecna-cena {
     font-weight: bold;
 }
 
