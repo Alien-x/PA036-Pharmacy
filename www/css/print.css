@@ -1,0 +1,11 @@
+.no-print {
+    display: none;
+}
+
+body {
+    font-size: 10px;
+}
+
+table .cena {
+    min-width: 60px;
+}

@@ -14,6 +14,7 @@ class TovarPresenter extends BaseCartPresenter {
     /** startup */
     public function startup() {
         parent::startup();
+        
         // get model
         $this->tovar = $this->getModel('tovar');
         

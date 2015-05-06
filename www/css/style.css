@@ -150,3 +150,10 @@ td.konecna-cena {
     float: right;
 }
 
+table .suma {
+    border: 2px solid black;
+}
+
+table .suma td {
+    font-weight: bold;
+}

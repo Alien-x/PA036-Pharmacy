@@ -19,11 +19,32 @@ public function printAll(){
   
   public function printFaktura($id_faktura){
       return $this->connection->query('
-      select id_faktura,t.id_tovar,nazov,fp.pocet,t.cena,doplatok 
-      from faktura_polozka fp join tovar t on fp.id_tovar = t.id_tovar
-      where id_faktura =?',$id_faktura);
+                select id_faktura,t.id_tovar,nazov,fp.pocet,t.cena,doplatok 
+                from faktura_polozka fp join tovar t on fp.id_tovar = t.id_tovar
+                where id_faktura =?',$id_faktura);
   }
   
-
+    public function createFaktura($id_lekarnik){
+        
+        $row = $this->getTable()->insert(array(
+            'cas_vystavenia' => date("Y-m-d H:i:s"),
+            'id_lekarnik' => $id_lekarnik
+        ));
+        
+        return $row->id;
+    }
+    
+    
+    public function addFakturaPolozka($id_faktura, $id_tovar, $pocet, $platba) {
+        
+        $res = $this->connection->query('
+                select add_to_faktura(?, ?, ?, ?)',
+                $id_faktura,
+                $id_tovar,
+                $pocet, 
+                $platba)->fetch();
+        
+        return $this->pg_array_parse($res[0]);
+    }
 
 }

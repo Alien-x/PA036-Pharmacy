@@ -1,0 +1,42 @@
+{block content}
+
+    <h1 n:block="title">Faktura #{$fakturaID}</h1>
+   
+    {if count($fakturaPolozky)}
+        <table class="table table-bordered">
+            <tr>
+                <th>Název</th>
+                <th>Sériové číslo</th>
+                <th>Expirace</th>
+                <th>Způsob hrazení</th>
+                <th>Počet</th>
+                <th class="cena">Cena</th>
+            </tr>
+            {foreach $fakturaPolozky as $item}
+            <tr>
+                <td>{$item['nazov']}</td>
+                <td>{$item['sn']}</td>
+                <td>{$item['expiracia']}</td>
+                <td>{$item['sposob_uhrady']}</td>
+                <td>{$item['pocet']}</td>
+                <td>&euro; {$item['cena']}</td>
+            </tr>
+            {/foreach}
+            <tr class="suma">
+                <th>Cena celkem:</th>
+                <td colspan="4">
+                <td>&euro; {$cenaCelkem}</td>
+            </tr>
+        </table>
+        
+        <div class="buttons no-print">
+            <a class="btn btn-primary center" href="#" onClick="window.print();return false;">Tisk</a>
+            <a class="btn btn-success center" n:href="Namarkovane:odmarkovatVse">Potvrdit a pokračovat</a>
+        </div>
+    {else}
+        <em>Nebylo nalezeno žádné zboží</em>   
+    {/if}
+    
+    
+
+{/block}
