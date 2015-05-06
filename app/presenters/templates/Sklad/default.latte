@@ -29,7 +29,7 @@
                         <td><p><?php if($tovar->doplnkovy_tovar==1)echo "ano"; else echo "nie";?></p></td>
                         <td><p><a href="{link Tovar:nahrada null, $tovar->id_ucinna}">{$tovar->id_ucinna}</a></p></td>
                         <td><p>{$tovar->pocet}</p></td>
-                        <td><a href="{link Sklad:edit $tovar->id_tovar}" class="btn btn-danger">Odstrániť</a></td>
+                        <td>{if $tovar->aktivny}<a href="{link Sklad:delete $tovar->id_tovar}" class="btn btn-danger">Odstrániť</a>{/if}</td>
                         
                     </tr>
                     {/foreach}
