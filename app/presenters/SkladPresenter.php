@@ -125,5 +125,11 @@ class SkladPresenter extends BasePresenter {
 
         $this['insertForm']->setDefaults($tovar);
     }
+    
+    public function actionDelete($id){
+        $this->tovar->deleteTovar($id);
+        $this->flashMessage("Tovar " . $id . " bol úspešne odstranený.", 'success');
+        $this->redirect('default');
+    }
 
 }

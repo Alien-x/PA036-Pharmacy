@@ -19,7 +19,7 @@ class Tovar extends Repository {
                 from tovar t 
                 LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
                 LEFT JOIN obsah_latok ol ON(ol.id_liek = l.id_liek)
-                where id_skupina = ?', $indikacna_skupina);
+                where id_skupina = ?  and t.aktivny = true', $indikacna_skupina);
         } elseif ($isset && $indikacna_skupina == 0) {
             return $this->connection->query('
                 select t.id_tovar,t.nazov, t.cena, t.na_predpis, t.doplatok, 
@@ -28,7 +28,7 @@ class Tovar extends Repository {
                 from tovar t 
                 LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
                 LEFT JOIN obsah_latok ol ON(ol.id_liek = l.id_liek)
-                where t.doplnkovy_tovar = true');
+                where t.doplnkovy_tovar = true and t.aktivny = true');
         } else {
             return $this->connection->query('
                 select t.id_tovar,t.nazov, t.cena, t.na_predpis, t.doplatok, 
@@ -36,7 +36,7 @@ class Tovar extends Repository {
                     id_skupina , ol.id_ucinna 
                 from tovar t 
                 LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
-                LEFT JOIN obsah_latok ol ON(ol.id_liek = l.id_liek)');
+                LEFT JOIN obsah_latok ol ON(ol.id_liek = l.id_liek) and t.aktivny = true');
         }
     }
 
@@ -53,7 +53,7 @@ class Tovar extends Repository {
 		JOIN mnozstvo_forma m ON (m.id_forma = t.id_forma)
 		JOIN indikacna_skupina i ON(i.id_skupina = l.id_skupina)
 		JOIN ucinna_latka ul ON(ul.id_ucinna =ol.id_ucinna)
-		where t.id_tovar = ?', $id_tovar)
+		where t.id_tovar = ? and t.aktivny = true', $id_tovar)
                         ->fetch();
     }
 
@@ -65,21 +65,21 @@ class Tovar extends Repository {
                 join liek l on(t.id_tovar = l.id_liek) 
                 join obsah_latok o on (o.id_liek = l.id_liek) 
                 join ucinna_latka u on (u.id_ucinna = o.id_ucinna) 
-                where t.id_tovar=?', $id_tovar)
+                where t.id_tovar=? and t.aktivny = true', $id_tovar)
                         ->fetch();
     }
 
     public function printZleKombinacie($id_ucinna) {
         return $this->connection->query('
                 select t.id_tovar,t.nazov, t.cena, t.na_predpis, t.doplatok, 
-                    t.popis, t.doplnkovy_tovar, t.aktivny, t.pocet, t.drzitel, 
-                    id_skupina , ol.id_ucinna 
+                t.popis, t.doplnkovy_tovar, t.aktivny, t.pocet, t.drzitel, 
+                id_skupina , ol.id_ucinna 
                 from tovar t 
                 LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
                 LEFT JOIN obsah_latok ol ON(ol.id_liek = l.id_liek) 
                 where ol.id_ucinna in (
 			select id_ucinna_2 as id_ucinna from zla_kombinacia where id_ucinna_1 = ?
-                        )', $id_ucinna);
+                        ) and t.aktivny = true', $id_ucinna);
     }
 
     public function printUcinnaLatka($id_ucinna) {
@@ -102,7 +102,7 @@ class Tovar extends Repository {
     
     
     public function printIdLiek(){
-         return $this->connection->query('select l.id_tovar,nazov from tovar t join liek l on(t.id_tovar=l.id_tovar)')->fetchPairs('id_tovar','nazov');
+         return $this->connection->query('select l.id_tovar, t.nazov from tovar t right join liek l on(t.id_tovar=l.id_tovar) where t.aktivny = true')->fetchPairs('id_tovar','nazov');
     }
     
     public function inserSamotnytLiek($sn,$time,$FK){
@@ -117,7 +117,7 @@ class Tovar extends Repository {
                 from tovar t 
                 LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
                 JOIN obsah_latok ol ON(ol.id_liek = l.id_liek) 
-                where ol.id_ucinna = ?', $id_ucinna);
+                where ol.id_ucinna = ? and t.aktivny = true', $id_ucinna);
     }
 
     public function printIndikacneSkupiny() {
@@ -156,5 +156,9 @@ class Tovar extends Repository {
 
     public function tovarUpdate($data, $id){
         return $this->connection->table('tovar')->where('id_tovar',$id)->update($data);
+    }
+    
+    public function deleteTovar($id){
+        return $this->connection->query('update tovar set aktivny = ? where id_tovar = ?', false, $id);
     }
 }
