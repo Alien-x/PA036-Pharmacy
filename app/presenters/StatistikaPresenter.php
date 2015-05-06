@@ -11,14 +11,15 @@ class StatistikaPresenter extends BasePresenter {
 
     /** @var Pharmacy\Tovar */
     private $lekarnik;
-    
+    private $tovar;
     /** startup */
     public function startup() {
         parent::startup();
         
         // get model
         $this->lekarnik = $this->getModel('lekarnik');
-        
+         $this->tovar = $this->getModel('tovar');
+         
         // user access
         if(!$this->isUserSpravca()) {
             throw new Nette\Application\ForbiddenRequestException;
@@ -55,6 +56,34 @@ class StatistikaPresenter extends BasePresenter {
     public function renderEdit($od,$doo){
         
         $this->template->lekarnikci = $this->lekarnik->printLekarniciFaktury($od, $doo);
+    }
+    
+    
+    protected function createComponentStatFormBestsellers()
+    {
+        $form = new Form;
+        $form->addText('od', 'Od dátumu:')
+            ->setRequired();
+        $form->addText('doo', 'Po dátum:')
+            ->setRequired();
+
+
+        $form->addSubmit('send', 'Zobrazit');
+
+        $form->onSuccess[] = array($this, 'volajEditBestsellers');
+
+        return $form;
+    }
+    
+    public function volajEditBestsellers($form){
+        
+        $values = $form->getValues();
+        $this->redirect('Statistika:editBestsellers', $values->od, $values->doo);
+    }
+    
+    public function renderEditBestsellers($od,$doo){
+        
+        $this->template->tovary = $this->tovar->printBestsellers($od.$doo);
     }
 
 
