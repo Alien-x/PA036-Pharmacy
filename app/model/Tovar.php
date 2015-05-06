@@ -48,11 +48,11 @@ class Tovar extends Repository {
                     i.nazov as skupina_nazov, ol.id_ucinna, ul.popis as ucinna_nazov, 
                     t.mnozstvo, t.uzitie, m.nazov as jednotka
                 from tovar t 
-                LEFT OUTER JOIN liek l ON(l.id_tovar = t.id_tovar) 
-                JOIN obsah_latok ol ON (ol.id_liek = l.id_liek)
-		JOIN mnozstvo_forma m ON (m.id_forma = t.id_forma)
-		JOIN indikacna_skupina i ON(i.id_skupina = l.id_skupina)
-		JOIN ucinna_latka ul ON(ul.id_ucinna =ol.id_ucinna)
+                LEFT JOIN liek l ON(l.id_tovar = t.id_tovar) 
+                LEFT JOIN obsah_latok ol ON (ol.id_liek = l.id_liek)
+		LEFT JOIN mnozstvo_forma m ON (m.id_forma = t.id_forma)
+		LEFT JOIN indikacna_skupina i ON(i.id_skupina = l.id_skupina)
+		LEFT JOIN ucinna_latka ul ON(ul.id_ucinna =ol.id_ucinna)
 		where t.id_tovar = ? and t.aktivny = true', $id_tovar)
                         ->fetch();
     }
