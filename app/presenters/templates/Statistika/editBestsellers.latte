@@ -12,11 +12,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    
                     {foreach $tovary as $tovar}
                     <tr>
                         <td><p><a href="{link Tovar:show $tovar->id_tovar}">{$tovar->nazov}</a></p></td>
                         <td><p>{$tovar->cena}</p></td>
-                        <td><p>{$tovar->pocetBest}</p></td>
+                        <td><p>{$tovar->pocetbest}</p></td>
                     </tr>
                     {/foreach}
                 </tbody>
