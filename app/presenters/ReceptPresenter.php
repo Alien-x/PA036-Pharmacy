@@ -14,11 +14,16 @@ class ReceptPresenter extends BaseCartPresenter {
     private $cartItemID; // to copy info form (hidden)
 
     /** startup */
-    protected function startup() {
+    public function startup() {
         parent::startup();
         
         // get model
         $this->recept = $this->getModel('recept');
+        
+        // user access
+        if(!$this->isUserPredavac()) {
+            throw new Nette\Application\ForbiddenRequestException;
+        }
     }
 
     public function renderDefault() {

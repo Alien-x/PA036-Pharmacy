@@ -29,11 +29,10 @@ services:
 	lekarnik: Pharmacy\Lekarnik
 	faktura: Pharmacy\Faktura
 	recept: Pharmacy\Recept
-                
-#faktura: Pharmacy\Faktura
+	
+	# authenticator
+	authenticator: UserManager
 
-
-
-security:
-    users:
-        admin: admin  # user 'admin', password 'admin'
+#security:
+#    users:
+#        admin: admin  # user 'admin', password 'admin'

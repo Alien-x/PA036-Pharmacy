@@ -13,7 +13,11 @@ class NamarkovanePresenter extends BaseCartPresenter {
         
         // template
         $template->zbozi = $this->getCartZbozi();
-
+        
+        // user access
+        if(!$this->isUserPredavac()) {
+            throw new Nette\Application\ForbiddenRequestException;
+        }
     }
     
     public function renderOdmarkovat($itemID) {

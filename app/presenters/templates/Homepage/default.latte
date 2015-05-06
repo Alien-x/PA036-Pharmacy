@@ -1,13 +1,17 @@
 {block content}
 
     <div class="homepage">
-        <a class="box" n:href="Sklad:default">
-            <img src="images/sklad.png" alt="sklad">
-            <h2>Skladová evidence</h2>
-        </a>
-        <a class="box" n:href="Tovar:default">
-            <img src="images/pokladna.png" alt="pokladna">
-            <h2>Pokladniční systém</h2>
-        </a>
+        {if $role_spravca}
+            <a class="box" n:href="Sklad:default">
+                <img src="images/sklad.png" alt="sklad">
+                <h2>Skladová evidence</h2>
+            </a>
+        {/if}
+        {if $role_predavac}
+            <a class="box" n:href="Tovar:default">
+                <img src="images/pokladna.png" alt="pokladna">
+                <h2>Pokladniční systém</h2>
+            </a>
+        {/if}
     </div>
 {/block}

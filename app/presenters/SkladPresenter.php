@@ -12,9 +12,16 @@ class SkladPresenter extends BasePresenter {
     private $tovar;
 
     /** startup */
-    protected function startup() {
+    public function startup() {
         parent::startup();
+        
+        // model
         $this->tovar = $this->getModel('tovar');
+        
+        // user access
+        if(!$this->isUserSpravca()) {
+            throw new Nette\Application\ForbiddenRequestException;
+        }
     }
 
     public function renderDefault() {

@@ -13,10 +13,16 @@ class FakturaPresenter extends BasePresenter {
     private $faktura;
     
     /** startup */
-    protected function startup() {
+    public function startup() {
         parent::startup();
+        
         // get model
         $this->faktura = $this->getModel('faktura');
+        
+        // user access
+        if(!$this->isUserPredavac()) {
+            throw new Nette\Application\ForbiddenRequestException;
+        }
     }
   
     public function renderDefault(){

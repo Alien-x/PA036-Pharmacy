@@ -13,10 +13,16 @@ class StatistikaPresenter extends BasePresenter {
     private $lekarnik;
     
     /** startup */
-    protected function startup() {
+    public function startup() {
         parent::startup();
+        
         // get model
         $this->lekarnik = $this->getModel('lekarnik');
+        
+        // user access
+        if(!$this->isUserSpravca()) {
+            throw new Nette\Application\ForbiddenRequestException;
+        }
     }
   
     public function renderDefault(){

@@ -5,9 +5,9 @@
 
     <title>{ifset title}{include title|striptags} | {/ifset}Pharmacy</title>
 
-    <link rel="stylesheet" href="{$basePath}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="{$basePath}/js/jquery.min.js"></script>
-    <script src="{$basePath}/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
     <!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="{$basePath}/css/jquery.dataTables.min.css">
@@ -33,23 +33,43 @@
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
               {if $user->loggedIn}
-                <li class="dropdown">
-                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pokladniční systém <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a n:href="Tovar:default">Tovary</a></li>
-                    <li><a n:href="Namarkovane:default">Namarkované zboží</a></li>
-                    <li><a n:href="Faktura:default">Faktury</a></li>
-                  </ul>
-                </li>
+                {if $role_predavac}
+                    <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pokladniční systém <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a n:href="Tovar:default">Tovary</a></li>
+                        <li><a n:href="Namarkovane:default">Namarkované zboží</a></li>
+                        <li><a n:href="Faktura:default">Faktury</a></li>
+                      </ul>
+                    </li>
+                {/if}
+                {if $role_spravca}
                 <li><a n:href="Sklad:default">Skladová evidencia</a></li>
                 <li><a n:href="Statistika:default">Štatistika zamestnancov</a></li>
+                {/if}
               {/if}
             </ul>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li>
                   {if $user->loggedIn}
-                      <span class="user">Přihlášen jako <strong>{$user->id}</strong> | <a n:href="Sign:out">Odhlásit se</a></span>
+                      <span class="user">Uživatel #<strong>{$user->id}</strong> 
+                      (
+                      {if $role_spravca}
+                      správce
+                          {if $role_magister}
+                          , prodejce - s předpisem
+                          {/if}
+                      {elseif $role_predavac}
+                      prodejce
+                        {if $role_magister}
+                        - s předpisem
+                        {else}
+                        - bez předpisu
+                        {/if}
+                      {/if}
+                      )    
+                      | <a n:href="Sign:out">Odhlásit se</a></span>
                   {else}
                     <a n:href="Sign:in"><span class="glyphicon glyphicon-log-in"></span> Přihlásit se</a>
                   {/if}

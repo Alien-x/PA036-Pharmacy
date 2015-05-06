@@ -14,7 +14,7 @@ class BaseCartPresenter extends BasePresenter {
     private $sessionCart;
     
     /** startup */
-    protected function startup() {
+    public function startup() {
         parent::startup();
         
         // get cart
@@ -27,6 +27,11 @@ class BaseCartPresenter extends BasePresenter {
         // zbozi
         if(!is_array($this->sessionCart->zbozi)) {
             $this->sessionCart->zbozi = array();
+        }
+        
+        // user access
+        if(!$this->isUserPredavac()) {
+            throw new Nette\Application\ForbiddenRequestException;
         }
     }
     

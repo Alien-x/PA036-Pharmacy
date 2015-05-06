@@ -12,10 +12,15 @@ class TovarPresenter extends BaseCartPresenter {
     
     
     /** startup */
-    protected function startup() {
+    public function startup() {
         parent::startup();
         // get model
         $this->tovar = $this->getModel('tovar');
+        
+        // user access
+        if(!$this->isUserPredavac()) {
+            throw new Nette\Application\ForbiddenRequestException;
+        }
     }
 
     public function renderDefault() {
