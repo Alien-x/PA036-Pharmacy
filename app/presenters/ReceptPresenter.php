@@ -67,16 +67,23 @@ class ReceptPresenter extends BaseCartPresenter {
         // recept found
         if($this->recept->receptExists($values['id_recept'])) {
             
-            $this->assignReceptToZboziInCart($values['cartItemID'], $values['id_recept']);
-            $this->setUhradaToZboziInCart($values['cartItemID'], $this->recept->getZpusobHrazeni($values['id_recept']));
+            // prekrocen pocet 2 tovaru na recept
+            if($this->recept->getPocetVydanychTovaru($values['id_recept']) + $this->getCountZboziWithRecept($values['id_recept']) >= 2) {
+                
+                $this->flashMessage('Recept #'.$values['id_recept'].' nelze přiřadit - byl překročen maximální počet dvou léků na tento recept.' , 'info');
+                $this->redirect('Recept:priradit', $values['cartItemID']);
+            }
+            // ok
+            else {
+                $this->assignReceptToZboziInCart($values['cartItemID'], $values['id_recept']);
+                $this->setUhradaToZboziInCart($values['cartItemID'], $this->recept->getZpusobHrazeni($values['id_recept']));
+                $this->redirect('Namarkovane:default');
+            }
         }
         // new recept
         else {
             $this->redirect('Recept:add', $values['id_recept'], $values['cartItemID']);
         }
-        
-        
-        $this->redirect('Namarkovane:default');
     }
     
     

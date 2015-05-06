@@ -41,6 +41,14 @@ class Recept extends Repository {
         $this->connection->query(
             'INSERT INTO recept', $recept);
     }
+    
+    public function getPocetVydanychTovaru($id_recept) {
+        
+        return $this->connection->query('
+                    select count(*) as count 
+                    from recept_faktury 
+                    where id_recept = ?', $id_recept)->fetch()->count;
+    }
   
 
 

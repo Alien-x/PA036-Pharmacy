@@ -81,4 +81,16 @@ class BaseCartPresenter extends BasePresenter {
        return $this->sessionCart->zbozi;
     }
     
+    protected function getCountZboziWithRecept($id_recept) {
+        
+        $count = 0;
+        
+        foreach ($this->sessionCart->zbozi as $zbozi) {
+            if($zbozi['id_recept'] == $id_recept) {
+                $count++;
+            }
+        }
+        
+        return $count;
+    }
 }
