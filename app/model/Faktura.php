@@ -26,12 +26,14 @@ public function printAll(){
   
     public function createFaktura($id_lekarnik){
         
-        $row = $this->getTable()->insert(array(
+        $this->getTable()->insert(array(
             'cas_vystavenia' => date("Y-m-d H:i:s"),
             'id_lekarnik' => $id_lekarnik
         ));
-        
-        return $row->id;
+    }
+    
+    public function getNextFakturaId(){
+       return $this->connection->query('select last_value as last_value from faktura_id_seq')->fetch()->last_value;
     }
     
     

@@ -50,8 +50,9 @@ class NamarkovanePresenter extends BaseCartPresenter {
         $this->removeFakturaPolozky();
         
         // insert faktura to DB
-        $id_faktura = $this->faktura->createFaktura($this->getUser()->getId());
-        
+        $this->faktura->createFaktura($this->getUser()->getId());
+        $id_faktura = $this->faktura->getNextFakturaId();
+                
         foreach ($this->getCartZbozi() as $zbozi) {
             
             // save to db
